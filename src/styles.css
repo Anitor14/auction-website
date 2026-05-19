@@ -27,7 +27,11 @@
   --color-brand-muted: var(--brand-muted);
   --color-ink: var(--ink);
   --color-surface: var(--surface);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
+  --animate-ticker: ticker 40s linear infinite;
+  --animate-pulse-bid: pulse-bid 1.5s ease-in-out infinite;
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
