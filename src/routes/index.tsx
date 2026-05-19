@@ -187,7 +187,7 @@ function Index() {
             <span className="inline-flex items-center gap-2 rounded-full border border-zinc-950/10 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
               <span className="size-1.5 rounded-full bg-brand" /> Cross-border bidding · Live now
             </span>
-            <h1 className="mt-6 text-balance font-display text-6xl leading-[0.95] sm:text-8xl lg:text-9xl">
+            <h1 className="mt-6 text-balance font-display text-6xl leading-[0.95] lg:text-8xl">
               Bid from Lagos.<br />
               <em className="italic text-brand">Win in London.</em>
             </h1>
