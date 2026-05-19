@@ -187,8 +187,9 @@ function Index() {
             <span className="inline-flex items-center gap-2 rounded-full border border-zinc-950/10 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
               <span className="size-1.5 rounded-full bg-brand" /> Cross-border bidding · Live now
             </span>
-            <h1 className="mt-6 text-balance font-display text-5xl font-medium leading-none tracking-tighter sm:text-7xl lg:text-8xl">
-              Bid from Lagos. <br /> Win in London.
+            <h1 className="mt-6 text-balance font-display text-6xl leading-[0.95] sm:text-8xl lg:text-9xl">
+              Bid from Lagos.<br />
+              <em className="italic text-brand">Win in London.</em>
             </h1>
             <p className="mt-8 max-w-[48ch] text-lg leading-relaxed text-zinc-500 text-pretty">
               The hybrid marketplace connecting West African capital with European secondary markets.
