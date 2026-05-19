@@ -187,8 +187,9 @@ function Index() {
             <span className="inline-flex items-center gap-2 rounded-full border border-zinc-950/10 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
               <span className="size-1.5 rounded-full bg-brand" /> Cross-border bidding · Live now
             </span>
-            <h1 className="mt-6 text-balance font-display text-5xl font-medium leading-none tracking-tighter sm:text-7xl lg:text-8xl">
-              Bid from Lagos. <br /> Win in London.
+            <h1 className="mt-6 text-balance font-display text-6xl leading-[0.95] sm:text-8xl lg:text-9xl">
+              Bid from Lagos.<br />
+              <em className="italic text-brand">Win in London.</em>
             </h1>
             <p className="mt-8 max-w-[48ch] text-lg leading-relaxed text-zinc-500 text-pretty">
               The hybrid marketplace connecting West African capital with European secondary markets.
@@ -590,6 +591,196 @@ function Index() {
           </div>
         </div>
       </section>
+
+      {/* Press */}
+      <section className="border-y border-zinc-950/5 bg-white py-16">
+        <div className="mx-auto max-w-7xl px-6">
+          <p className="text-center text-[10px] font-semibold uppercase tracking-[0.25em] text-zinc-400 mb-10">
+            Featured in
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-8 items-center">
+            {["BLOOMBERG", "TechCabal", "Financial Times", "Quartz Africa", "WIRED", "The Economist"].map((p) => (
+              <span
+                key={p}
+                className="text-center font-display text-2xl italic text-zinc-400 hover:text-ink transition-colors"
+              >
+                {p}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Past Results */}
+      <section className="mx-auto max-w-7xl px-6 py-24">
+        <div className="flex items-end justify-between mb-12">
+          <div>
+            <span className="text-xs font-semibold uppercase tracking-widest text-brand">Hammer prices</span>
+            <h2 className="mt-2 font-display text-5xl">
+              Recently <em className="italic">settled</em>.
+            </h2>
+          </div>
+          <a href="#" className="text-sm font-medium text-zinc-500 hover:text-brand">
+            Full results archive →
+          </a>
+        </div>
+        <div className="overflow-hidden rounded-2xl ring-1 ring-zinc-950/5 bg-white">
+          <table className="w-full">
+            <thead className="bg-zinc-50 border-b border-zinc-950/5">
+              <tr className="text-left text-[10px] uppercase tracking-widest text-zinc-400">
+                <th className="py-4 px-6 font-medium">Lot</th>
+                <th className="py-4 px-6 font-medium hidden md:table-cell">Category</th>
+                <th className="py-4 px-6 font-medium hidden md:table-cell">Format</th>
+                <th className="py-4 px-6 font-medium text-right">Hammer</th>
+                <th className="py-4 px-6 font-medium text-right hidden sm:table-cell">vs Estimate</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-zinc-950/5">
+              {[
+                ["Patek Philippe Nautilus 5711", "Watches", "Sealed", "$142,500", "+18%"],
+                ["1965 Mercedes 230SL Pagoda", "Automotive", "English", "€87,200", "+24%"],
+                ["Ben Enwonwu — Tutu Study", "Fine Art", "English", "£312,000", "+41%"],
+                ["Lekki Phase 1 Penthouse", "Real Estate", "Sealed", "₦480M", "+9%"],
+                ["Hermès Birkin 30 Himalaya", "Luxury", "English", "$248,000", "+31%"],
+                ["1976 Leica M4 Black", "Collectibles", "Dutch", "€8,400", "+12%"],
+              ].map((row) => (
+                <tr key={row[0]} className="hover:bg-zinc-50/50 transition-colors">
+                  <td className="py-4 px-6 font-medium">{row[0]}</td>
+                  <td className="py-4 px-6 text-sm text-zinc-500 hidden md:table-cell">{row[1]}</td>
+                  <td className="py-4 px-6 text-sm text-zinc-500 hidden md:table-cell">{row[2]}</td>
+                  <td className="py-4 px-6 text-right font-display text-lg">{row[3]}</td>
+                  <td className="py-4 px-6 text-right text-sm text-emerald-600 hidden sm:table-cell">{row[4]}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* Upcoming Calendar */}
+      <section className="bg-zinc-900 text-white py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-widest text-brand">Auction Calendar</span>
+              <h2 className="mt-2 font-display text-5xl">
+                Mark your <em className="italic">dates</em>.
+              </h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 rounded-2xl overflow-hidden ring-1 ring-white/10">
+            {[
+              { day: "14", month: "FEB", title: "Lagos Modern & Contemporary", lots: "84 lots", city: "Lagos · 18:00 WAT" },
+              { day: "02", month: "MAR", title: "London Watch Sale Vol. XII", lots: "126 lots", city: "London · 14:00 GMT" },
+              { day: "21", month: "MAR", title: "Berlin Design Auction", lots: "57 lots", city: "Berlin · 16:00 CET" },
+              { day: "08", month: "APR", title: "African Heritage & Sculpture", lots: "42 lots", city: "Accra · 17:00 GMT" },
+              { day: "19", month: "APR", title: "Cross-Border Automotive", lots: "31 lots", city: "Live online · 15:00 WAT" },
+              { day: "03", month: "MAY", title: "Estate Real Property — Nairobi", lots: "12 lots", city: "Nairobi · 11:00 EAT" },
+            ].map((e) => (
+              <div key={e.title} className="bg-zinc-900 p-8 hover:bg-zinc-800 transition-colors cursor-pointer">
+                <div className="flex items-baseline gap-3">
+                  <span className="font-display text-5xl">{e.day}</span>
+                  <span className="text-xs uppercase tracking-widest text-zinc-500">{e.month}</span>
+                </div>
+                <h3 className="mt-6 font-display text-2xl">{e.title}</h3>
+                <p className="mt-3 text-xs text-zinc-500">{e.city}</p>
+                <p className="mt-1 text-xs text-brand">{e.lots} · Preview open</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Mobile App */}
+      <section className="mx-auto max-w-7xl px-6 py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <div className="lg:col-span-7">
+            <span className="text-xs font-semibold uppercase tracking-widest text-brand">On the go</span>
+            <h2 className="mt-2 font-display text-5xl lg:text-6xl text-balance">
+              The auction floor <em className="italic">in your pocket</em>.
+            </h2>
+            <p className="mt-6 text-lg text-zinc-500 leading-relaxed max-w-[48ch]">
+              One-tap bidding, push alerts for outbid moments, biometric login, and live video lots —
+              native iOS and Android, built for thin-bandwidth networks.
+            </p>
+            <ul className="mt-8 grid grid-cols-2 gap-x-8 gap-y-3 max-w-md">
+              {["Outbid push alerts", "Auto-bid ceiling", "Camera lot upload", "Wallet & escrow", "Offline draft bids", "Biometric login"].map((f) => (
+                <li key={f} className="flex items-center gap-2 text-sm text-zinc-700">
+                  <span className="size-1 rounded-full bg-brand" /> {f}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <button className="rounded-lg bg-zinc-900 text-white px-5 py-3 text-sm font-medium">Download for iOS</button>
+              <button className="rounded-lg bg-white text-zinc-900 px-5 py-3 text-sm font-medium ring-1 ring-zinc-950/10">
+                Get on Android
+              </button>
+            </div>
+          </div>
+          <div className="lg:col-span-5">
+            <div className="relative mx-auto w-64 aspect-[9/19] rounded-[2.5rem] bg-zinc-900 p-3 ring-1 ring-black/10 shadow-2xl">
+              <div className="absolute top-3 left-1/2 -translate-x-1/2 h-5 w-24 bg-zinc-900 rounded-b-2xl z-10" />
+              <div className="h-full w-full rounded-[2rem] bg-surface overflow-hidden flex flex-col">
+                <div className="bg-brand p-4 pt-8">
+                  <p className="text-[9px] uppercase tracking-widest text-white/70">Live · Ends 02:14</p>
+                  <p className="font-display text-2xl text-white mt-1">Rolex GMT II</p>
+                  <p className="font-display text-3xl text-white mt-3">$18,400</p>
+                </div>
+                <div className="flex-1 p-4 space-y-3 bg-zinc-50">
+                  <div className="rounded-lg bg-white p-3 ring-1 ring-zinc-950/5">
+                    <p className="text-[9px] uppercase text-zinc-400">You're winning</p>
+                    <p className="text-xs font-medium">Auto-bid up to $22,000</p>
+                  </div>
+                  {["adaeze.o · $18,400", "luxe_ldn · $18,200", "you · $18,000"].map((b, i) => (
+                    <div key={i} className="flex items-center justify-between rounded-lg bg-white p-3 ring-1 ring-zinc-950/5 text-xs">
+                      <span className="text-zinc-600">{b.split(" · ")[0]}</span>
+                      <span className="font-mono">{b.split(" · ")[1]}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="p-4 bg-white border-t border-zinc-950/5">
+                  <div className="rounded-lg bg-brand text-white py-3 text-center text-xs font-medium">
+                    Bid $18,600
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter */}
+      <section className="border-y border-zinc-950/5 bg-brand-muted py-20">
+        <div className="mx-auto max-w-3xl px-6 text-center">
+          <span className="text-xs font-semibold uppercase tracking-widest text-brand">The Gavel</span>
+          <h2 className="mt-2 font-display text-5xl lg:text-6xl text-balance">
+            Weekly dispatch from the <em className="italic">auction floor</em>.
+          </h2>
+          <p className="mt-6 text-zinc-600 max-w-xl mx-auto">
+            Upcoming sales, hammer-price reports, and verified vendor watchlists.
+            Delivered every Thursday. No spam, ever.
+          </p>
+          <form className="mt-8 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <input
+              type="email"
+              required
+              placeholder="you@studio.com"
+              className="flex-1 rounded-lg bg-white px-4 py-3 text-sm ring-1 ring-zinc-950/10 focus:ring-brand focus:outline-none"
+            />
+            <button
+              type="submit"
+              className="rounded-lg bg-zinc-900 text-white px-6 py-3 text-sm font-medium hover:bg-zinc-800 transition-colors"
+            >
+              Subscribe
+            </button>
+          </form>
+          <p className="mt-4 text-[10px] uppercase tracking-widest text-zinc-400">
+            Joining 28,400+ collectors & dealers
+          </p>
+        </div>
+      </section>
+
+
 
       {/* CTA */}
       <section className="mx-auto max-w-7xl px-6 py-24">
