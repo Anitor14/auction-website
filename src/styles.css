@@ -22,7 +22,8 @@
 
 @theme inline {
   --font-sans: "Inter", sans-serif;
-  --font-display: "Instrument Sans", sans-serif;
+  --font-display: "Instrument Serif", serif;
+  --font-mono: "JetBrains Mono", monospace;
   --color-brand: var(--brand);
   --color-brand-muted: var(--brand-muted);
   --color-ink: var(--ink);
