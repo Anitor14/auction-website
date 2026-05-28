@@ -1,9 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import heroWatch from "@/assets/hero-watch.jpg";
 import lotMacbook from "@/assets/lot-macbook.jpg";
 import lotBag from "@/assets/lot-bag.jpg";
 import lotArt from "@/assets/lot-art.jpg";
 import lotCar from "@/assets/lot-car.jpg";
+import { useStore } from "@/lib/store";
+import { CountdownTimer } from "@/components/countdown";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -129,56 +131,20 @@ const faqs = [
 ];
 
 function Index() {
-  return (
-    <div className="min-h-screen bg-surface font-sans text-ink selection:bg-brand/10 selection:text-brand">
-      {/* Live Ticker */}
-      <div className="overflow-hidden border-b border-zinc-950/5 bg-zinc-900 py-2.5">
-        <div className="flex whitespace-nowrap animate-ticker">
-          {[0, 1].map((dup) => (
-            <div key={dup} className="flex items-center gap-12 pr-12 shrink-0">
-              {tickerItems.map((item, i) => (
-                <span
-                  key={i}
-                  className="flex items-center gap-2 text-xs font-medium tracking-tight text-zinc-400"
-                >
-                  <span className="size-1.5 rounded-full bg-emerald-500" /> {item}
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
+  const { products } = useStore();
+  const activeLots = products.filter(p => p.status === "active" && p.type !== "Buy Now").slice(0, 4);
 
-      {/* Nav */}
-      <nav className="sticky top-0 z-50 border-b border-zinc-950/5 bg-surface/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-8">
-            <span className="font-display text-xl font-semibold tracking-tighter">KILIMANJARO</span>
-            <div className="hidden items-center gap-6 sm:flex">
-              <a href="#auctions" className="text-sm font-medium text-zinc-500 transition-colors hover:text-ink">
-                Auctions
-              </a>
-              <a href="#how" className="text-sm font-medium text-zinc-500 transition-colors hover:text-ink">
-                How it works
-              </a>
-              <a href="#vendors" className="text-sm font-medium text-zinc-500 transition-colors hover:text-ink">
-                Vendors
-              </a>
-              <a href="#pricing" className="text-sm font-medium text-zinc-500 transition-colors hover:text-ink">
-                Pricing
-              </a>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <button className="text-sm font-medium text-zinc-600 px-4 py-2 hover:text-ink transition-colors">
-              Sign in
-            </button>
-            <button className="rounded-full bg-brand px-5 py-2 text-sm font-medium text-white ring-1 ring-brand ring-offset-2 transition-transform active:scale-95">
-              Start Selling
-            </button>
-          </div>
-        </div>
-      </nav>
+  const IMAGES: Record<string, string> = {
+    "/src/assets/hero-watch.jpg": heroWatch,
+    "/src/assets/lot-macbook.jpg": lotMacbook,
+    "/src/assets/lot-bag.jpg": lotBag,
+    "/src/assets/lot-art.jpg": lotArt,
+    "/src/assets/lot-car.jpg": lotCar,
+  };
+  const getImageSrc = (path: string) => IMAGES[path] || path;
+
+  return (
+    <div className="bg-surface font-sans text-ink selection:bg-brand/10 selection:text-brand">
 
       {/* Hero */}
       <section className="mx-auto max-w-7xl px-6 py-20 lg:py-32">
@@ -257,38 +223,68 @@ function Index() {
           </div>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {lots.map((lot) => (
-              <div
-                key={lot.title}
-                className="group relative flex flex-col overflow-hidden rounded-xl bg-white ring-1 ring-black/5 transition-all hover:ring-black/10"
-              >
-                <img
-                  src={lot.image}
-                  alt={lot.title}
-                  loading="lazy"
-                  width={800}
-                  height={600}
-                  className="aspect-[4/3] w-full object-cover"
-                />
-                <div className="flex flex-col p-5">
-                  <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-wider text-zinc-400">
-                    <span>{lot.category}</span>
-                    <span className={lot.typeColor}>{lot.type}</span>
-                  </div>
-                  <h3 className="mt-2 font-medium">{lot.title}</h3>
-                  <div className="mt-4 grid grid-cols-2 border-t border-zinc-950/5 pt-4">
-                    <div>
-                      <p className="text-[10px] uppercase text-zinc-400">{lot.leftLabel}</p>
-                      <p className="font-display text-lg font-medium">{lot.leftValue}</p>
+            {activeLots.map((lot) => {
+              const currentPrice = lot.currentBid || lot.price;
+              const typeColor = 
+                lot.type === "English" ? "text-emerald-600" :
+                lot.type === "Sealed Bid" ? "text-blue-600" :
+                lot.type === "Dutch" ? "text-orange-600" :
+                lot.type === "Reverse" ? "text-purple-600" : "text-zinc-600";
+              
+              const leftLabel = 
+                lot.type === "English" ? "Current Bid" :
+                lot.type === "Sealed Bid" ? "Starting Price" :
+                lot.type === "Dutch" ? "Current Price" :
+                lot.type === "Reverse" ? "Current Offer" : "Price";
+              
+              return (
+                <Link
+                  key={lot.id}
+                  to="/auction/$productId"
+                  params={{ productId: lot.id }}
+                  className="group relative flex flex-col overflow-hidden rounded-xl bg-white ring-1 ring-black/5 transition-all hover:ring-black/10 hover:shadow-md cursor-pointer"
+                >
+                  <img
+                    src={getImageSrc(lot.image)}
+                    alt={lot.title}
+                    loading="lazy"
+                    width={800}
+                    height={600}
+                    className="aspect-4/3 w-full object-cover transition-transform group-hover:scale-[1.02]"
+                  />
+                  <div className="flex flex-col p-5">
+                    <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-wider text-zinc-400">
+                      <span>{lot.category}</span>
+                      <span className={typeColor}>{lot.type}</span>
                     </div>
-                    <div className="text-right">
-                      <p className="text-[10px] uppercase text-zinc-400">{lot.rightLabel}</p>
-                      <p className={`font-display text-lg font-medium ${lot.rightColor}`}>{lot.rightValue}</p>
+                    <h3 className="mt-2 font-medium text-zinc-800 line-clamp-1 group-hover:text-brand transition-colors">{lot.title}</h3>
+                    <div className="mt-4 grid grid-cols-2 border-t border-zinc-950/5 pt-4">
+                      <div>
+                        <p className="text-[10px] uppercase text-zinc-400">{leftLabel}</p>
+                        <p className="font-display text-lg font-medium">₦{currentPrice.toLocaleString()}</p>
+                      </div>
+                      <div className="text-right">
+                        {lot.endTime ? (
+                          <>
+                            <p className="text-[10px] uppercase text-zinc-400">Ends In</p>
+                            <p className="font-display text-lg font-medium text-orange-600">
+                              <CountdownTimer endTime={lot.endTime} />
+                            </p>
+                          </>
+                        ) : (
+                          <>
+                            <p className="text-[10px] uppercase text-zinc-400">Status</p>
+                            <p className="font-display text-lg font-medium text-emerald-600">
+                              {lot.stock !== undefined ? `${lot.stock} Left` : "Active"}
+                            </p>
+                          </>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            ))}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -718,7 +714,7 @@ function Index() {
             </div>
           </div>
           <div className="lg:col-span-5">
-            <div className="relative mx-auto w-64 aspect-[9/19] rounded-[2.5rem] bg-zinc-900 p-3 ring-1 ring-black/10 shadow-2xl">
+            <div className="relative mx-auto w-64 aspect-9/19 rounded-[2.5rem] bg-zinc-900 p-3 ring-1 ring-black/10 shadow-2xl">
               <div className="absolute top-3 left-1/2 -translate-x-1/2 h-5 w-24 bg-zinc-900 rounded-b-2xl z-10" />
               <div className="h-full w-full rounded-[2rem] bg-surface overflow-hidden flex flex-col">
                 <div className="bg-brand p-4 pt-8">
@@ -807,37 +803,6 @@ function Index() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-zinc-950/5 bg-white py-16">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-12">
-            <div className="col-span-2 space-y-4">
-              <span className="font-display text-2xl font-semibold tracking-tighter">KILIMANJARO</span>
-              <p className="text-sm text-zinc-500 max-w-xs">
-                A hybrid African marketplace combining instant commerce with competitive auction-driven pricing.
-              </p>
-            </div>
-            {[
-              ["Platform", ["Auctions", "Sell", "Categories", "Featured Lots"]],
-              ["Trust", ["KYC/AML", "Escrow", "Anti-shill", "Disputes"]],
-              ["Company", ["About", "Careers", "Press", "Contact"]],
-            ].map(([title, links]) => (
-              <div key={title as string} className="flex flex-col gap-3">
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400">{title}</span>
-                {(links as string[]).map((l) => (
-                  <a key={l} href="#" className="text-sm text-zinc-600 hover:text-brand transition-colors">
-                    {l}
-                  </a>
-                ))}
-              </div>
-            ))}
-          </div>
-          <div className="mt-16 pt-8 border-t border-zinc-950/5 flex flex-col sm:flex-row justify-between gap-4">
-            <p className="text-xs text-zinc-400">© 2025 Kilimanjaro Bids Ltd. Lagos · London · Berlin.</p>
-            <p className="text-xs text-zinc-400">Regulated · PCI-DSS · GDPR compliant</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

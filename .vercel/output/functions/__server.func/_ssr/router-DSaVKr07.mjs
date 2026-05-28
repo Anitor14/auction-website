@@ -1,4 +1,4 @@
-import { d as compileDecodeCharMap, g as createLRUCache, _ as trimPath, X as rewriteBasepath, e as composeRewrites, N as processRouteTree, M as processRouteMasks, W as resolvePath, c as cleanPath, a0 as trimPathRight, f as createControlledPromise, L as parseHref, o as executeRewriteInput, y as isDangerousProtocol, Q as redirect, E as isRedirect, B as isNotFound, s as findSingleMatch, j as deepEqual, D as DEFAULT_PROTOCOL_ALLOWLIST, b as buildRouteBranch, w as interpolatePath, K as nullReplaceEqualDeep, T as replaceEqualDeep$1, I as last, i as decodePath, q as findFlatMatch, t as functionalUpdate$1, r as findRouteMatch, C as isPromise, x as invariant, Y as rootRouteId, a2 as useRouter, H as jsxRuntimeExports, O as Outlet, v as hasKeys, p as executeRewriteOutput, a as arraysEqual, P as reactExports, R as React, n as exactPathTest, S as removeTrailingSlash, A as isModuleNotFoundError, F as isServer$1, k as dummyMatchContext, J as matchContext, m as escapeHtml, z as isInlinableStylesheet, u as getAssetCrossOrigin, a1 as useHydrated, $ as trimPathLeft, G as joinPaths, V as resolveManifestAssetLink, l as encodePathLikeUrl, U as requireReactDom } from "./server-Cfk_oS8j.mjs";
+import { d as compileDecodeCharMap, g as createLRUCache, _ as trimPath, X as rewriteBasepath, e as composeRewrites, N as processRouteTree, M as processRouteMasks, W as resolvePath, c as cleanPath, a0 as trimPathRight, f as createControlledPromise, L as parseHref, o as executeRewriteInput, y as isDangerousProtocol, Q as redirect, E as isRedirect, B as isNotFound, s as findSingleMatch, j as deepEqual, D as DEFAULT_PROTOCOL_ALLOWLIST, b as buildRouteBranch, w as interpolatePath, K as nullReplaceEqualDeep, T as replaceEqualDeep$1, I as last, i as decodePath, q as findFlatMatch, t as functionalUpdate$1, r as findRouteMatch, C as isPromise, x as invariant, Y as rootRouteId, a2 as useRouter, H as jsxRuntimeExports, O as Outlet, v as hasKeys, p as executeRewriteOutput, a as arraysEqual, P as reactExports, R as React, n as exactPathTest, S as removeTrailingSlash, A as isModuleNotFoundError, F as isServer$1, k as dummyMatchContext, J as matchContext, m as escapeHtml, z as isInlinableStylesheet, u as getAssetCrossOrigin, a1 as useHydrated, $ as trimPathLeft, G as joinPaths, V as resolveManifestAssetLink, l as encodePathLikeUrl, U as requireReactDom } from "./server-B9xMLAOv.mjs";
 import "node:async_hooks";
 import "node:stream/web";
 import "node:stream";
@@ -947,7 +947,7 @@ var RouterCore = class {
       });
     };
     this.parseLocation = (locationToParse, previousLocation) => {
-      const parse = ({ pathname, search, hash, href, state }) => {
+      const parse = ({ pathname, search, hash, href, state: state2 }) => {
         if (!this.rewrite && !/[ \x00-\x1f\x7f\u0080-\uffff]/.test(pathname)) {
           const parsedSearch2 = this.options.parseSearch(search);
           const searchStr2 = this.options.stringifySearch(parsedSearch2);
@@ -959,7 +959,7 @@ var RouterCore = class {
             searchStr: searchStr2,
             search: nullReplaceEqualDeep(previousLocation?.search, parsedSearch2),
             hash: decodePath(hash.slice(1)).path,
-            state: replaceEqualDeep$1(previousLocation?.state, state)
+            state: replaceEqualDeep$1(previousLocation?.state, state2)
           };
         }
         const fullUrl = new URL(href, this.origin);
@@ -975,7 +975,7 @@ var RouterCore = class {
           searchStr,
           search: nullReplaceEqualDeep(previousLocation?.search, parsedSearch),
           hash: decodePath(url.hash.slice(1)).path,
-          state: replaceEqualDeep$1(previousLocation?.state, state)
+          state: replaceEqualDeep$1(previousLocation?.state, state2)
         };
       };
       const location = parse(locationToParse);
@@ -1990,10 +1990,10 @@ var BaseRootRoute = class extends BaseRoute {
   }
 };
 function useMatch(opts) {
-  const router = useRouter();
+  const router2 = useRouter();
   const nearestMatchId = reactExports.useContext(opts.from ? dummyMatchContext : matchContext);
   const key = opts.from ?? nearestMatchId;
-  const matchStore = key ? opts.from ? router.stores.getRouteMatchStore(key) : router.stores.matchStores.get(key) : void 0;
+  const matchStore = key ? opts.from ? router2.stores.getRouteMatchStore(key) : router2.stores.matchStores.get(key) : void 0;
   {
     const match = matchStore?.get();
     if ((opts.shouldThrow ?? true) && !match) {
@@ -2046,13 +2046,13 @@ function useSearch(opts) {
   });
 }
 function useNavigate(_defaultOpts) {
-  const router = useRouter();
+  const router2 = useRouter();
   return reactExports.useCallback((options) => {
-    return router.navigate({
+    return router2.navigate({
       ...options,
       from: options.from ?? _defaultOpts?.from
     });
-  }, [_defaultOpts?.from, router]);
+  }, [_defaultOpts?.from, router2]);
 }
 function useRouteContext(opts) {
   return useMatch({
@@ -2062,14 +2062,14 @@ function useRouteContext(opts) {
 }
 requireReactDom();
 function useLinkProps(options, forwardedRef) {
-  const router = useRouter();
+  const router2 = useRouter();
   const innerRef = useForwardedRef(forwardedRef);
   const { activeProps, inactiveProps, activeOptions, to, preload: userPreload, preloadDelay: userPreloadDelay, preloadIntentProximity: _preloadIntentProximity, hashScrollIntoView, replace, startTransition, resetScroll, viewTransition, children, target, disabled, style, className, onClick, onBlur, onFocus, onMouseEnter, onMouseLeave, onTouchStart, ignoreBlocker, params: _params, search: _search, hash: _hash, state: _state, mask: _mask, reloadDocument: _reloadDocument, unsafeRelative: _unsafeRelative, from: _from, _fromLocation, ...propsSafeToSpread } = options;
   {
     const safeInternal = isSafeInternal(to);
     if (typeof to === "string" && !safeInternal && to.indexOf(":") > -1) try {
       new URL(to);
-      if (isDangerousProtocol(to, router.protocolAllowlist)) {
+      if (isDangerousProtocol(to, router2.protocolAllowlist)) {
         if (false) ;
         return {
           ...propsSafeToSpread,
@@ -2094,14 +2094,14 @@ function useLinkProps(options, forwardedRef) {
       };
     } catch {
     }
-    const next2 = router.buildLocation({
+    const next2 = router2.buildLocation({
       ...options,
       from: options.from
     });
-    const hrefOption2 = getHrefOption(next2.maskedLocation ? next2.maskedLocation.publicHref : next2.publicHref, next2.maskedLocation ? next2.maskedLocation.external : next2.external, router.history, disabled);
+    const hrefOption2 = getHrefOption(next2.maskedLocation ? next2.maskedLocation.publicHref : next2.publicHref, next2.maskedLocation ? next2.maskedLocation.external : next2.external, router2.history, disabled);
     const externalLink2 = (() => {
       if (hrefOption2?.external) {
-        if (isDangerousProtocol(hrefOption2.href, router.protocolAllowlist)) {
+        if (isDangerousProtocol(hrefOption2.href, router2.protocolAllowlist)) {
           return;
         }
         return hrefOption2.href;
@@ -2109,7 +2109,7 @@ function useLinkProps(options, forwardedRef) {
       if (safeInternal) return void 0;
       if (typeof to === "string" && to.indexOf(":") > -1) try {
         new URL(to);
-        if (isDangerousProtocol(to, router.protocolAllowlist)) {
+        if (isDangerousProtocol(to, router2.protocolAllowlist)) {
           if (false) ;
           return;
         }
@@ -2119,13 +2119,13 @@ function useLinkProps(options, forwardedRef) {
     })();
     const isActive2 = (() => {
       if (externalLink2) return false;
-      const currentLocation2 = router.stores.location.get();
+      const currentLocation2 = router2.stores.location.get();
       const exact = activeOptions?.exact ?? false;
       if (exact) {
-        if (!exactPathTest(currentLocation2.pathname, next2.pathname, router.basepath)) return false;
+        if (!exactPathTest(currentLocation2.pathname, next2.pathname, router2.basepath)) return false;
       } else {
-        const currentPathSplit = removeTrailingSlash(currentLocation2.pathname, router.basepath);
-        const nextPathSplit = removeTrailingSlash(next2.pathname, router.basepath);
+        const currentPathSplit = removeTrailingSlash(currentLocation2.pathname, router2.basepath);
+        const nextPathSplit = removeTrailingSlash(next2.pathname, router2.basepath);
         if (!(currentPathSplit.startsWith(nextPathSplit) && (currentPathSplit.length === nextPathSplit.length || currentPathSplit[nextPathSplit.length] === "/"))) return false;
       }
       if (activeOptions?.includeSearch ?? true) {
@@ -2232,7 +2232,7 @@ var Link = reactExports.forwardRef((props, ref) => {
   }
   return reactExports.createElement(_asChild, linkProps, children);
 });
-var Route$3 = class Route extends BaseRoute {
+var Route$c = class Route extends BaseRoute {
   /**
   * @deprecated Use the `createRoute` function instead.
   */
@@ -2290,7 +2290,7 @@ var Route$3 = class Route extends BaseRoute {
   }
 };
 function createRoute(options) {
-  return new Route$3(options);
+  return new Route$c(options);
 }
 function createRootRouteWithContext() {
   return (options) => {
@@ -2423,6 +2423,13 @@ var Router = class extends RouterCore {
     super(options, getStoreFactory);
   }
 };
+function useLocation(opts) {
+  const router2 = useRouter();
+  {
+    const location = router2.stores.location.get();
+    return location;
+  }
+}
 function Asset(asset) {
   const { attrs, children, nonce } = asset;
   switch (asset.tag) {
@@ -2520,7 +2527,7 @@ function Script({ attrs, children }) {
     return null;
   }
 }
-function buildTagsFromMatches(router, nonce, matches, assetCrossOrigin) {
+function buildTagsFromMatches(router2, nonce, matches, assetCrossOrigin) {
   const routeMeta = matches.map((match) => match.meta).filter(Boolean);
   const resultMeta = [];
   const metaByAttribute = {};
@@ -2574,7 +2581,7 @@ function buildTagsFromMatches(router, nonce, matches, assetCrossOrigin) {
       nonce
     }
   }));
-  const manifest = router.ssr?.manifest;
+  const manifest = router2.ssr?.manifest;
   const assetLinks = matches.map((match) => manifest?.routes[match.routeId]?.assets ?? []).filter(Boolean).flat(1).flatMap((asset) => {
     if (asset.tag === "link") {
       if (isInlinableStylesheet(manifest, asset)) return [];
@@ -2600,7 +2607,7 @@ function buildTagsFromMatches(router, nonce, matches, assetCrossOrigin) {
     return [];
   });
   const preloadLinks = [];
-  matches.map((match) => router.looseRoutesById[match.routeId]).forEach((route) => router.ssr?.manifest?.routes[route.id]?.preloads?.filter(Boolean).forEach((preload) => {
+  matches.map((match) => router2.looseRoutesById[match.routeId]).forEach((route) => router2.ssr?.manifest?.routes[route.id]?.preloads?.filter(Boolean).forEach((preload) => {
     const preloadLink = resolveManifestAssetLink(preload);
     preloadLinks.push({
       tag: "link",
@@ -2638,9 +2645,9 @@ function buildTagsFromMatches(router, nonce, matches, assetCrossOrigin) {
   ], (d) => JSON.stringify(d));
 }
 var useTags = (assetCrossOrigin) => {
-  const router = useRouter();
-  const nonce = router.options.ssr?.nonce;
-  return buildTagsFromMatches(router, nonce, router.stores.matches.get(), assetCrossOrigin);
+  const router2 = useRouter();
+  const nonce = router2.options.ssr?.nonce;
+  return buildTagsFromMatches(router2, nonce, router2.stores.matches.get(), assetCrossOrigin);
 };
 function uniqBy(arr, fn) {
   const seen = /* @__PURE__ */ new Set();
@@ -2661,13 +2668,13 @@ function HeadContent(props) {
   })) });
 }
 var Scripts = () => {
-  const router = useRouter();
-  const nonce = router.options.ssr?.nonce;
+  const router2 = useRouter();
+  const nonce = router2.options.ssr?.nonce;
   const getAssetScripts = (matches) => {
     const assetScripts = [];
-    const manifest = router.ssr?.manifest;
+    const manifest = router2.ssr?.manifest;
     if (!manifest) return [];
-    matches.map((match) => router.looseRoutesById[match.routeId]).forEach((route) => manifest.routes[route.id]?.assets?.filter((d) => d.tag === "script").forEach((asset) => {
+    matches.map((match) => router2.looseRoutesById[match.routeId]).forEach((route) => manifest.routes[route.id]?.assets?.filter((d) => d.tag === "script").forEach((asset) => {
       assetScripts.push({
         tag: "script",
         attrs: {
@@ -2689,14 +2696,14 @@ var Scripts = () => {
     children
   }));
   {
-    const activeMatches = router.stores.matches.get();
+    const activeMatches = router2.stores.matches.get();
     const assetScripts = getAssetScripts(activeMatches);
-    return renderScripts(router, getScripts(activeMatches), assetScripts);
+    return renderScripts(router2, getScripts(activeMatches), assetScripts);
   }
 };
-function renderScripts(router, scripts, assetScripts) {
+function renderScripts(router2, scripts, assetScripts) {
   let serverBufferedScript = void 0;
-  if (router.serverSsr) serverBufferedScript = router.serverSsr.takeBufferedScripts();
+  if (router2.serverSsr) serverBufferedScript = router2.serverSsr.takeBufferedScripts();
   const allScripts = [...scripts, ...assetScripts];
   if (serverBufferedScript) allScripts.unshift(serverBufferedScript);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: allScripts.map((asset, i) => /* @__PURE__ */ reactExports.createElement(Asset, {
@@ -3527,8 +3534,8 @@ var Query = class extends Removable {
     });
     return data;
   }
-  setState(state) {
-    this.#dispatch({ type: "setState", state });
+  setState(state2) {
+    this.#dispatch({ type: "setState", state: state2 });
   }
   cancel(options) {
     const promise = this.#retryer?.promise;
@@ -3776,35 +3783,35 @@ var Query = class extends Removable {
     }
   }
   #dispatch(action) {
-    const reducer = (state) => {
+    const reducer = (state2) => {
       switch (action.type) {
         case "failed":
           return {
-            ...state,
+            ...state2,
             fetchFailureCount: action.failureCount,
             fetchFailureReason: action.error
           };
         case "pause":
           return {
-            ...state,
+            ...state2,
             fetchStatus: "paused"
           };
         case "continue":
           return {
-            ...state,
+            ...state2,
             fetchStatus: "fetching"
           };
         case "fetch":
           return {
-            ...state,
-            ...fetchState(state.data, this.options),
+            ...state2,
+            ...fetchState(state2.data, this.options),
             fetchMeta: action.meta ?? null
           };
         case "success":
           const newState = {
-            ...state,
+            ...state2,
             ...successState(action.data, action.dataUpdatedAt),
-            dataUpdateCount: state.dataUpdateCount + 1,
+            dataUpdateCount: state2.dataUpdateCount + 1,
             ...!action.manual && {
               fetchStatus: "idle",
               fetchFailureCount: 0,
@@ -3816,11 +3823,11 @@ var Query = class extends Removable {
         case "error":
           const error = action.error;
           return {
-            ...state,
+            ...state2,
             error,
-            errorUpdateCount: state.errorUpdateCount + 1,
+            errorUpdateCount: state2.errorUpdateCount + 1,
             errorUpdatedAt: Date.now(),
-            fetchFailureCount: state.fetchFailureCount + 1,
+            fetchFailureCount: state2.fetchFailureCount + 1,
             fetchFailureReason: error,
             fetchStatus: "idle",
             status: "error",
@@ -3830,12 +3837,12 @@ var Query = class extends Removable {
           };
         case "invalidate":
           return {
-            ...state,
+            ...state2,
             isInvalidated: true
           };
         case "setState":
           return {
-            ...state,
+            ...state2,
             ...action.state
           };
       }
@@ -4081,27 +4088,27 @@ var Mutation = class extends Removable {
     }
   }
   #dispatch(action) {
-    const reducer = (state) => {
+    const reducer = (state2) => {
       switch (action.type) {
         case "failed":
           return {
-            ...state,
+            ...state2,
             failureCount: action.failureCount,
             failureReason: action.error
           };
         case "pause":
           return {
-            ...state,
+            ...state2,
             isPaused: true
           };
         case "continue":
           return {
-            ...state,
+            ...state2,
             isPaused: false
           };
         case "pending":
           return {
-            ...state,
+            ...state2,
             context: action.context,
             data: void 0,
             failureCount: 0,
@@ -4114,7 +4121,7 @@ var Mutation = class extends Removable {
           };
         case "success":
           return {
-            ...state,
+            ...state2,
             data: action.data,
             failureCount: 0,
             failureReason: null,
@@ -4124,10 +4131,10 @@ var Mutation = class extends Removable {
           };
         case "error":
           return {
-            ...state,
+            ...state2,
             data: void 0,
             error: action.error,
-            failureCount: state.failureCount + 1,
+            failureCount: state2.failureCount + 1,
             failureReason: action.error,
             isPaused: false,
             status: "error"
@@ -4171,13 +4178,13 @@ var MutationCache = class extends Subscribable {
   #mutations;
   #scopes;
   #mutationId;
-  build(client, options, state) {
+  build(client, options, state2) {
     const mutation = new Mutation({
       client,
       mutationCache: this,
       mutationId: ++this.#mutationId,
       options: client.defaultMutationOptions(options),
-      state
+      state: state2
     });
     this.add(mutation);
     return mutation;
@@ -4282,7 +4289,7 @@ var QueryCache = class extends Subscribable {
     this.#queries = /* @__PURE__ */ new Map();
   }
   #queries;
-  build(client, options, state) {
+  build(client, options, state2) {
     const queryKey = options.queryKey;
     const queryHash = options.queryHash ?? hashQueryKeyByOptions(queryKey, options);
     let query = this.get(queryHash);
@@ -4292,7 +4299,7 @@ var QueryCache = class extends Subscribable {
         queryKey,
         queryHash,
         options: client.defaultQueryOptions(options),
-        state,
+        state: state2,
         defaultOptions: client.getQueryDefaults(queryKey)
       });
       this.add(query);
@@ -4434,8 +4441,8 @@ var QueryClient = class {
     return Promise.resolve(cachedData);
   }
   getQueriesData(filters) {
-    return this.#queryCache.findAll(filters).map(({ queryKey, state }) => {
-      const data = state.data;
+    return this.#queryCache.findAll(filters).map(({ queryKey, state: state2 }) => {
+      const data = state2.data;
       return [queryKey, data];
     });
   }
@@ -4663,7 +4670,649 @@ var QueryClientProvider = ({
   }, [client]);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientContext.Provider, { value: client, children });
 };
-const appCss = "/assets/styles-Chz9Xhbk.css";
+const DEFAULT_USERS = [
+  {
+    id: "user-1",
+    email: "buyer@kilimanjaro.com",
+    name: "Adaeze O.",
+    role: "buyer",
+    walletBalance: 15e6
+  },
+  {
+    id: "admin-1",
+    email: "admin@kilimanjaro.com",
+    name: "Auction Manager",
+    role: "admin",
+    walletBalance: 0
+  }
+];
+const hoursFromNow = (h) => new Date(Date.now() + h * 60 * 60 * 1e3).toISOString();
+const minutesFromNow = (m) => new Date(Date.now() + m * 60 * 1e3).toISOString();
+const daysFromNow = (d) => new Date(Date.now() + d * 24 * 60 * 60 * 1e3).toISOString();
+const DEFAULT_PRODUCTS = [
+  {
+    id: "lot-1",
+    title: "MacBook Pro M1 Max 64GB",
+    description: "Apple MacBook Pro 16-inch with M1 Max chip (10-core CPU, 32-core GPU), 64GB Unified Memory, and 2TB SSD. Pristine condition with only 12 battery cycles. Includes original 140W fast charger and packaging. Fully verified by Kilimanjaro hardware team in Lagos.",
+    image: "/src/assets/lot-macbook.jpg",
+    category: "Electronics",
+    type: "English",
+    status: "active",
+    price: 1e6,
+    reservePrice: 16e5,
+    currentBid: 145e4,
+    highestBidderId: "user-1",
+    highestBidderName: "Adaeze O.",
+    bidsCount: 14,
+    endTime: hoursFromNow(4.2),
+    increment: 5e4
+  },
+  {
+    id: "lot-2",
+    title: "Chanel Classic Flap Bag",
+    description: "Timeless Chanel Medium Classic Double Flap Bag in black caviar quilted leather with gold-tone hardware. Authenticity certified by luxury experts. Light wear on interior leather, exterior leather structure remains pristine. Includes original dust bag, box, and authenticity card.",
+    image: "/src/assets/lot-bag.jpg",
+    category: "Luxury Watches",
+    type: "Sealed Bid",
+    status: "active",
+    price: 25e5,
+    reservePrice: 32e5,
+    bidsCount: 0,
+    endTime: daysFromNow(2)
+  },
+  {
+    id: "lot-3",
+    title: "'Genesis' by Kolawole",
+    description: "An original oil on canvas piece (120x150cm) by contemporary Nigerian artist Kolawole. Painted in 2023, 'Genesis' explores post-colonial themes using vibrant acrylic paint layers and local fabrics. Signed by the artist, with an official certificate of authenticity from the Nike Art Gallery.",
+    image: "/src/assets/lot-art.jpg",
+    category: "Fine Art",
+    type: "Dutch",
+    status: "active",
+    price: 85e4,
+    // Current price
+    dutchStartPrice: 12e5,
+    dutchDropRate: 5e4,
+    dutchDropIntervalHours: 1,
+    dutchReservePrice: 5e5,
+    bidsCount: 0,
+    endTime: hoursFromNow(12)
+  },
+  {
+    id: "lot-4",
+    title: "2021 Acura TLX Tech",
+    description: "Sleek 2021 Acura TLX Technology Package. 2.0L turbocharged inline-4 engine, 10-speed automatic transmission, with SH-AWD. Features a premium leather interior, a 10.2-inch center display, Els Studio 3D sound system, and blind-spot monitoring. Duty paid in full. Mileage: 18,400 miles. Located in Lagos.",
+    image: "/src/assets/lot-car.jpg",
+    category: "Automotive",
+    type: "English",
+    status: "active",
+    price: 2e7,
+    reservePrice: 26e6,
+    currentBid: 24e6,
+    highestBidderId: "other-user",
+    highestBidderName: "Tunde A.",
+    bidsCount: 22,
+    endTime: minutesFromNow(45),
+    increment: 5e5
+  },
+  {
+    id: "lot-5",
+    title: "Rolex Datejust 41 Blue Dial",
+    description: "Rolex Datejust 41 Ref. 126334 with striking bright blue fluted dial on a Jubilee bracelet. White Rolesor bezel. Chronometer certified Calibre 3235 automatic movement with 70-hour power reserve. Box and papers dated December 2022. Immaculate condition with light hairline scratches on the clasp.",
+    image: "/src/assets/hero-watch.jpg",
+    category: "Luxury Watches",
+    type: "English",
+    status: "active",
+    price: 8e6,
+    reservePrice: 1e7,
+    currentBid: 92e5,
+    highestBidderId: "user-1",
+    highestBidderName: "Adaeze O.",
+    bidsCount: 9,
+    endTime: daysFromNow(1),
+    increment: 2e5
+  },
+  {
+    id: "lot-6",
+    title: "Premium Leather Wallet",
+    description: "Handcrafted full-grain Italian leather wallet in tan. Minimalist bi-fold design with RFID protection, 6 card slots, and a bill compartment. Designed to age beautifully with a rich patina over time.",
+    image: "/src/assets/lot-bag.jpg",
+    // reuse bag image
+    category: "Collectibles",
+    type: "Buy Now",
+    status: "active",
+    price: 45e3,
+    stock: 15,
+    bidsCount: 0
+  },
+  {
+    id: "lot-7",
+    title: "Vintage Brass Desk Lamp",
+    description: "Mid-century solid brass articulating banker desk lamp. Featuring a green glass shade and pull chain switch. Re-wired and polished for modern use while retaining classic vintage appeal.",
+    image: "/src/assets/lot-art.jpg",
+    // reuse art image
+    category: "Collectibles",
+    type: "Buy Now",
+    status: "active",
+    price: 12e4,
+    stock: 5,
+    bidsCount: 0
+  }
+];
+const DEFAULT_BIDS = [
+  {
+    id: "bid-1",
+    productId: "lot-1",
+    userId: "user-1",
+    userName: "Adaeze O.",
+    amount: 145e4,
+    timestamp: minutesFromNow(-5)
+  },
+  {
+    id: "bid-2",
+    productId: "lot-1",
+    userId: "other-1",
+    userName: "luxe_ldn",
+    amount: 14e5,
+    timestamp: minutesFromNow(-12)
+  },
+  {
+    id: "bid-3",
+    productId: "lot-4",
+    userId: "other-user",
+    userName: "Tunde A.",
+    amount: 24e6,
+    timestamp: minutesFromNow(-2)
+  }
+];
+const DEFAULT_STATE = {
+  users: DEFAULT_USERS,
+  currentUser: null,
+  products: DEFAULT_PRODUCTS,
+  bids: DEFAULT_BIDS,
+  cart: [],
+  transactions: []
+};
+const STORE_KEY = "kilimanjaro_auction_store_v1";
+let state = DEFAULT_STATE;
+if (typeof window !== "undefined") {
+  const saved = localStorage.getItem(STORE_KEY);
+  if (saved) {
+    try {
+      state = JSON.parse(saved);
+    } catch (e) {
+      console.error("Failed to parse saved state", e);
+      state = DEFAULT_STATE;
+    }
+  } else {
+    localStorage.setItem(STORE_KEY, JSON.stringify(DEFAULT_STATE));
+  }
+}
+const listeners = /* @__PURE__ */ new Set();
+function saveAndNotify() {
+  if (typeof window !== "undefined") {
+    localStorage.setItem(STORE_KEY, JSON.stringify(state));
+  }
+  listeners.forEach((l) => l());
+}
+const getStoreState = () => state;
+const subscribe = (listener) => {
+  listeners.add(listener);
+  return () => {
+    listeners.delete(listener);
+  };
+};
+const login = (email) => {
+  const user = state.users.find((u) => u.email.toLowerCase() === email.toLowerCase());
+  if (user) {
+    state.currentUser = user;
+    saveAndNotify();
+    return true;
+  }
+  return false;
+};
+const register = (email, name, role) => {
+  if (state.users.some((u) => u.email.toLowerCase() === email.toLowerCase())) {
+    return false;
+  }
+  const newUser = {
+    id: `user-${Date.now()}`,
+    email,
+    name,
+    role,
+    walletBalance: role === "buyer" ? 1e7 : 0
+    // Seeding new buyers with 10M NGN for fun
+  };
+  state.users.push(newUser);
+  state.currentUser = newUser;
+  saveAndNotify();
+  return true;
+};
+const logout = () => {
+  state.currentUser = null;
+  saveAndNotify();
+};
+const placeBid = (productId, amount) => {
+  if (!state.currentUser) {
+    return { success: false, message: "Please log in to place bids." };
+  }
+  if (state.currentUser.role !== "buyer") {
+    return { success: false, message: "Only buyers can place bids." };
+  }
+  const product = state.products.find((p) => p.id === productId);
+  if (!product) {
+    return { success: false, message: "Product not found." };
+  }
+  if (product.status !== "active") {
+    return { success: false, message: "Auction is not active." };
+  }
+  if (state.currentUser.walletBalance < amount) {
+    return { success: false, message: "Insufficient wallet balance. Please top up." };
+  }
+  if (product.type === "English") {
+    const minBid = (product.currentBid || product.price) + (product.increment || 0);
+    if (amount < minBid) {
+      return { success: false, message: `Bid must be at least ₦${minBid.toLocaleString()}` };
+    }
+    product.currentBid = amount;
+    product.highestBidderId = state.currentUser.id;
+    product.highestBidderName = state.currentUser.name;
+    product.bidsCount += 1;
+  } else if (product.type === "Sealed Bid") {
+    if (amount < product.price) {
+      return { success: false, message: `Bid must be at least the reserve/starting price ₦${product.price.toLocaleString()}` };
+    }
+    product.bidsCount += 1;
+  } else if (product.type === "Reverse") {
+    const maxBid = product.currentBid || product.price;
+    if (amount >= maxBid) {
+      return { success: false, message: `Your bid must be lower than the current offer of ₦${maxBid.toLocaleString()}` };
+    }
+    product.currentBid = amount;
+    product.highestBidderId = state.currentUser.id;
+    product.highestBidderName = state.currentUser.name;
+    product.bidsCount += 1;
+  } else {
+    return { success: false, message: "Invalid auction format for bidding." };
+  }
+  const newBid = {
+    id: `bid-${Date.now()}`,
+    productId,
+    userId: state.currentUser.id,
+    userName: state.currentUser.name,
+    amount,
+    timestamp: (/* @__PURE__ */ new Date()).toISOString()
+  };
+  state.bids.push(newBid);
+  saveAndNotify();
+  return { success: true, message: "Bid placed successfully!" };
+};
+const buyDutchAuction = (productId) => {
+  if (!state.currentUser) {
+    return { success: false, message: "Please log in to purchase." };
+  }
+  const product = state.products.find((p) => p.id === productId);
+  if (!product || product.type !== "Dutch" || product.status !== "active") {
+    return { success: false, message: "Product is not available for purchase." };
+  }
+  const purchasePrice = product.price;
+  if (state.currentUser.walletBalance < purchasePrice) {
+    return { success: false, message: "Insufficient wallet balance." };
+  }
+  product.status = "sold";
+  product.highestBidderId = state.currentUser.id;
+  product.highestBidderName = state.currentUser.name;
+  addToCart(productId, 1, "auction_win", purchasePrice);
+  saveAndNotify();
+  return { success: true, message: "Item purchased and added to cart!" };
+};
+const addToCart = (productId, quantity = 1, type = "buy_now", customPrice) => {
+  const product = state.products.find((p) => p.id === productId);
+  if (!product) {
+    return { success: false, message: "Product not found." };
+  }
+  const price = customPrice !== void 0 ? customPrice : product.price;
+  if (type === "buy_now" && product.stock !== void 0) {
+    if (product.stock < quantity) {
+      return { success: false, message: "Insufficient stock available." };
+    }
+  }
+  const existing = state.cart.find((item) => item.productId === productId);
+  if (existing) {
+    if (type === "buy_now" && product.stock !== void 0) {
+      if (product.stock < existing.quantity + quantity) {
+        return { success: false, message: "Cannot add more. Insufficient stock." };
+      }
+      existing.quantity += quantity;
+    } else {
+      return { success: false, message: "Item is already in your cart." };
+    }
+  } else {
+    state.cart.push({
+      productId,
+      productTitle: product.title,
+      productImage: product.image,
+      price,
+      quantity,
+      type
+    });
+  }
+  saveAndNotify();
+  return { success: true, message: "Added to cart successfully!" };
+};
+const removeFromCart = (productId) => {
+  state.cart = state.cart.filter((item) => item.productId !== productId);
+  saveAndNotify();
+};
+const checkoutCart = (paymentMethod) => {
+  if (!state.currentUser) {
+    return { success: false, message: "Please log in to checkout." };
+  }
+  let totalAmount = 0;
+  for (const item of state.cart) {
+    totalAmount += item.price * item.quantity;
+  }
+  const escrowFee = totalAmount * 0.02;
+  const shippingFee = 5e4;
+  const grandTotal = totalAmount + escrowFee + shippingFee;
+  if (paymentMethod === "wallet") {
+    if (state.currentUser.walletBalance < grandTotal) {
+      return { success: false, message: "Insufficient wallet balance. Please top up your wallet." };
+    }
+    state.currentUser.walletBalance -= grandTotal;
+    const userInList = state.users.find((u) => u.id === state.currentUser?.id);
+    if (userInList) {
+      userInList.walletBalance = state.currentUser.walletBalance;
+    }
+  }
+  for (const item of state.cart) {
+    const product = state.products.find((p) => p.id === item.productId);
+    if (product) {
+      if (item.type === "buy_now" && product.stock !== void 0) {
+        product.stock = Math.max(0, product.stock - item.quantity);
+        if (product.stock === 0) {
+          product.status = "sold";
+        }
+      } else {
+        product.status = "sold";
+      }
+    }
+    const itemTotal = item.price * item.quantity;
+    const newTx = {
+      id: `tx-${Math.floor(1e5 + Math.random() * 9e5)}`,
+      productId: item.productId,
+      productTitle: item.productTitle,
+      productImage: item.productImage,
+      buyerId: state.currentUser.id,
+      buyerName: state.currentUser.name,
+      amount: itemTotal,
+      type: item.type === "auction_win" ? "bid_escrow" : "buy_now",
+      status: "escrow_funded",
+      // Payment completed, funds are now in escrow!
+      date: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    state.transactions.push(newTx);
+  }
+  state.cart = [];
+  saveAndNotify();
+  return { success: true, message: "Checkout successful! Funds are secured in Escrow." };
+};
+const updateEscrowStatus = (transactionId, status) => {
+  const tx = state.transactions.find((t) => t.id === transactionId);
+  if (!tx) {
+    return { success: false, message: "Transaction not found." };
+  }
+  tx.status = status;
+  if (status === "disbursed") {
+    const adminUser = state.users.find((u) => u.role === "admin");
+    if (adminUser) {
+      adminUser.walletBalance += tx.amount;
+    }
+  }
+  if (status === "refunded") {
+    const buyer = state.users.find((u) => u.id === tx.buyerId);
+    if (buyer) {
+      buyer.walletBalance += tx.amount;
+      if (state.currentUser?.id === buyer.id) {
+        state.currentUser.walletBalance = buyer.walletBalance;
+      }
+    }
+  }
+  saveAndNotify();
+  return { success: true, message: `Transaction status updated to ${status}.` };
+};
+const topUpWallet = (amount) => {
+  if (!state.currentUser) return false;
+  state.currentUser.walletBalance += amount;
+  const userInList = state.users.find((u) => u.id === state.currentUser?.id);
+  if (userInList) {
+    userInList.walletBalance = state.currentUser.walletBalance;
+  }
+  saveAndNotify();
+  return true;
+};
+const withdrawWallet = (amount) => {
+  if (!state.currentUser) return { success: false, message: "Not logged in" };
+  if (state.currentUser.walletBalance < amount) {
+    return { success: false, message: "Insufficient balance to withdraw." };
+  }
+  state.currentUser.walletBalance -= amount;
+  const userInList = state.users.find((u) => u.id === state.currentUser?.id);
+  if (userInList) {
+    userInList.walletBalance = state.currentUser.walletBalance;
+  }
+  saveAndNotify();
+  return { success: true, message: "Withdrawal processed successfully." };
+};
+const addProduct = (product) => {
+  const newId = `lot-${Date.now()}`;
+  const newProduct = {
+    ...product,
+    id: newId,
+    bidsCount: 0
+  };
+  state.products.push(newProduct);
+  saveAndNotify();
+  return newId;
+};
+const startAuctionNow = (productId) => {
+  const product = state.products.find((p) => p.id === productId);
+  if (product) {
+    product.status = "active";
+    product.startsAt = (/* @__PURE__ */ new Date()).toISOString();
+    product.endTime = hoursFromNow(2);
+    saveAndNotify();
+  }
+};
+const endAuctionEarly = (productId) => {
+  const product = state.products.find((p) => p.id === productId);
+  if (product) {
+    product.status = "closed";
+    product.endTime = (/* @__PURE__ */ new Date()).toISOString();
+    if (product.type === "English" || product.type === "Reverse") {
+      if (product.highestBidderId && product.currentBid) {
+        state.cart.push({
+          productId: product.id,
+          productTitle: product.title,
+          productImage: product.image,
+          price: product.currentBid,
+          quantity: 1,
+          type: "auction_win"
+        });
+      }
+    } else if (product.type === "Sealed Bid") {
+      const lotBids = state.bids.filter((b) => b.productId === product.id);
+      if (lotBids.length > 0) {
+        const winningBid = lotBids.reduce((max, b) => b.amount > max.amount ? b : max, lotBids[0]);
+        product.currentBid = winningBid.amount;
+        product.highestBidderId = winningBid.userId;
+        product.highestBidderName = winningBid.userName;
+        state.cart.push({
+          productId: product.id,
+          productTitle: product.title,
+          productImage: product.image,
+          price: winningBid.amount,
+          quantity: 1,
+          type: "auction_win"
+        });
+      }
+    }
+    saveAndNotify();
+  }
+};
+const resetStore = () => {
+  state = {
+    users: JSON.parse(JSON.stringify(DEFAULT_USERS)),
+    currentUser: null,
+    products: JSON.parse(JSON.stringify(DEFAULT_PRODUCTS)),
+    bids: JSON.parse(JSON.stringify(DEFAULT_BIDS)),
+    cart: [],
+    transactions: []
+  };
+  saveAndNotify();
+};
+function useStore() {
+  const [currentState, setCurrentState] = reactExports.useState(() => getStoreState());
+  reactExports.useEffect(() => {
+    setCurrentState(getStoreState());
+    const unsubscribe = subscribe(() => {
+      setCurrentState({ ...getStoreState() });
+    });
+    return unsubscribe;
+  }, []);
+  return currentState;
+}
+const mergeClasses = (...classes) => classes.filter((className, index, array) => {
+  return Boolean(className) && className.trim() !== "" && array.indexOf(className) === index;
+}).join(" ").trim();
+const toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+const toCamelCase = (string) => string.replace(
+  /^([A-Z])|[\s-_]+(\w)/g,
+  (match, p1, p2) => p2 ? p2.toUpperCase() : p1.toLowerCase()
+);
+const toPascalCase = (string) => {
+  const camelCase = toCamelCase(string);
+  return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
+};
+var defaultAttributes = {
+  xmlns: "http://www.w3.org/2000/svg",
+  width: 24,
+  height: 24,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 2,
+  strokeLinecap: "round",
+  strokeLinejoin: "round"
+};
+const hasA11yProp = (props) => {
+  for (const prop in props) {
+    if (prop.startsWith("aria-") || prop === "role" || prop === "title") {
+      return true;
+    }
+  }
+  return false;
+};
+const Icon = reactExports.forwardRef(
+  ({
+    color = "currentColor",
+    size = 24,
+    strokeWidth = 2,
+    absoluteStrokeWidth,
+    className = "",
+    children,
+    iconNode,
+    ...rest
+  }, ref) => reactExports.createElement(
+    "svg",
+    {
+      ref,
+      ...defaultAttributes,
+      width: size,
+      height: size,
+      stroke: color,
+      strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
+      className: mergeClasses("lucide", className),
+      ...!children && !hasA11yProp(rest) && { "aria-hidden": "true" },
+      ...rest
+    },
+    [
+      ...iconNode.map(([tag, attrs]) => reactExports.createElement(tag, attrs)),
+      ...Array.isArray(children) ? children : [children]
+    ]
+  )
+);
+const createLucideIcon = (iconName, iconNode) => {
+  const Component = reactExports.forwardRef(
+    ({ className, ...props }, ref) => reactExports.createElement(Icon, {
+      ref,
+      iconNode,
+      className: mergeClasses(
+        `lucide-${toKebabCase(toPascalCase(iconName))}`,
+        `lucide-${iconName}`,
+        className
+      ),
+      ...props
+    })
+  );
+  Component.displayName = toPascalCase(iconName);
+  return Component;
+};
+const __iconNode$5 = [
+  ["rect", { width: "7", height: "9", x: "3", y: "3", rx: "1", key: "10lvy0" }],
+  ["rect", { width: "7", height: "5", x: "14", y: "3", rx: "1", key: "16une8" }],
+  ["rect", { width: "7", height: "9", x: "14", y: "12", rx: "1", key: "1hutg5" }],
+  ["rect", { width: "7", height: "5", x: "3", y: "16", rx: "1", key: "ldoo1y" }]
+];
+const LayoutDashboard = createLucideIcon("layout-dashboard", __iconNode$5);
+const __iconNode$4 = [
+  ["path", { d: "m10 17 5-5-5-5", key: "1bsop3" }],
+  ["path", { d: "M15 12H3", key: "6jk70r" }],
+  ["path", { d: "M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4", key: "u53s6r" }]
+];
+const LogIn = createLucideIcon("log-in", __iconNode$4);
+const __iconNode$3 = [
+  ["path", { d: "m16 17 5-5-5-5", key: "1bji2h" }],
+  ["path", { d: "M21 12H9", key: "dn1m92" }],
+  ["path", { d: "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4", key: "1uf3rs" }]
+];
+const LogOut = createLucideIcon("log-out", __iconNode$3);
+const __iconNode$2 = [
+  ["circle", { cx: "8", cy: "21", r: "1", key: "jimo8o" }],
+  ["circle", { cx: "19", cy: "21", r: "1", key: "13723u" }],
+  [
+    "path",
+    {
+      d: "M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12",
+      key: "9zh506"
+    }
+  ]
+];
+const ShoppingCart = createLucideIcon("shopping-cart", __iconNode$2);
+const __iconNode$1 = [
+  [
+    "path",
+    {
+      d: "M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z",
+      key: "1s2grr"
+    }
+  ],
+  ["path", { d: "M20 2v4", key: "1rf3ol" }],
+  ["path", { d: "M22 4h-4", key: "gwowj6" }],
+  ["circle", { cx: "4", cy: "20", r: "2", key: "6kqj1y" }]
+];
+const Sparkles = createLucideIcon("sparkles", __iconNode$1);
+const __iconNode = [
+  [
+    "path",
+    {
+      d: "M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1",
+      key: "18etb6"
+    }
+  ],
+  ["path", { d: "M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4", key: "xoc0q4" }]
+];
+const Wallet = createLucideIcon("wallet", __iconNode);
+const appCss = "/assets/styles-BPaH647c.css";
 function NotFoundComponent() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-md text-center", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-7xl font-bold text-foreground", children: "404" }),
@@ -4681,7 +5330,7 @@ function NotFoundComponent() {
 }
 function ErrorComponent({ error, reset }) {
   console.error(error);
-  const router = useRouter();
+  const router2 = useRouter();
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-md text-center", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-xl font-semibold tracking-tight text-foreground", children: "This page didn't load" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm text-muted-foreground", children: "Something went wrong on our end. You can try refreshing or head back home." }),
@@ -4690,7 +5339,7 @@ function ErrorComponent({ error, reset }) {
         "button",
         {
           onClick: () => {
-            router.invalidate();
+            router2.invalidate();
             reset();
           },
           className: "inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90",
@@ -4708,19 +5357,17 @@ function ErrorComponent({ error, reset }) {
     ] })
   ] }) });
 }
-const Route$2 = createRootRouteWithContext()({
+const Route$b = createRootRouteWithContext()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" }
+      { title: "Kilimanjaro — Cross-Border Auction Marketplace" },
+      { name: "description", content: "Lagos to London cross-border live bidding engine with escrow settlement." },
+      { name: "author", content: "Kilimanjaro" },
+      { property: "og:title", content: "Kilimanjaro — Bid & Buy" },
+      { property: "og:description", content: "Connecting West African capital with European secondary markets." },
+      { property: "og:type", content: "website" }
     ],
     links: [
       {
@@ -4744,11 +5391,162 @@ function RootShell({ children }) {
   ] });
 }
 function RootComponent() {
-  const { queryClient } = Route$2.useRouteContext();
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {}) });
+  const { queryClient } = Route$b.useRouteContext();
+  const { currentUser, cart, bids, products } = useStore();
+  const location = useLocation();
+  const router2 = useRouter();
+  const handleLogout = () => {
+    logout();
+    router2.navigate({ to: "/" });
+  };
+  const tickerItems = [
+    "LAGOS: 2022 TOYOTA PRADO — CURRENT BID ₦42,500,000",
+    "LONDON: ROLEX DATEJUST 41 — CURRENT BID £9,200",
+    "ABUJA: LUXURY PENTHOUSE GWARINPA — STARTS IN 2H",
+    "BERLIN: HASSELBLAD 907X — CURRENT BID €4,800",
+    ...bids.slice(-3).map((b) => {
+      const prod = products.find((p) => p.id === b.productId);
+      return `LIVE BID: ${prod?.title || "Lot"} is at ₦${b.amount.toLocaleString()} by ${b.userName}`;
+    })
+  ];
+  const hideTicker = ["/auth/login", "/auth/register", "/admin/login"].includes(location.pathname);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-surface font-sans text-ink selection:bg-brand/10 selection:text-brand flex flex-col", children: [
+    !hideTicker && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-hidden border-b border-zinc-950/5 bg-zinc-900 py-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex whitespace-nowrap animate-ticker", children: [0, 1].map((dup) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-12 pr-12 shrink-0", children: tickerItems.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "span",
+      {
+        className: "flex items-center gap-2 text-[11px] font-medium tracking-tight text-zinc-400",
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "size-1.5 rounded-full bg-emerald-500 animate-pulse-bid" }),
+          " ",
+          item
+        ]
+      },
+      i
+    )) }, dup)) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { className: "sticky top-0 z-50 border-b border-zinc-950/5 bg-surface/80 backdrop-blur-md", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto flex max-w-7xl items-center justify-between px-6 py-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-8", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: "/", className: "font-display text-2xl font-semibold tracking-tighter text-ink hover:text-brand transition-colors", children: "KILIMANJARO" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "hidden items-center gap-6 sm:flex", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: "/products", className: "text-sm font-medium text-zinc-500 transition-colors hover:text-ink", children: "Browse Catalog" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/#how", className: "text-sm font-medium text-zinc-500 transition-colors hover:text-ink", children: "How It Works" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/#pricing", className: "text-sm font-medium text-zinc-500 transition-colors hover:text-ink", children: "Pricing" })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-4", children: currentUser ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4", children: [
+        currentUser.role === "admin" && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          Link,
+          {
+            to: "/admin/dashboard",
+            className: "flex items-center gap-1 rounded-full bg-zinc-900 px-3.5 py-1.5 text-xs font-medium text-white transition-all hover:bg-zinc-800",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(LayoutDashboard, { className: "size-3.5" }),
+              "Admin Panel"
+            ]
+          }
+        ),
+        currentUser.role === "buyer" && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          Link,
+          {
+            to: "/transactions",
+            className: "flex items-center gap-2 rounded-full border border-zinc-950/10 bg-white px-3.5 py-1.5 text-xs font-semibold text-zinc-700 shadow-sm transition-all hover:bg-zinc-50",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Wallet, { className: "size-3.5 text-brand" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+                "₦",
+                currentUser.walletBalance.toLocaleString()
+              ] })
+            ]
+          }
+        ),
+        currentUser.role === "buyer" && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          Link,
+          {
+            to: "/cart",
+            className: "relative flex size-9 items-center justify-center rounded-full border border-zinc-950/10 bg-white text-zinc-700 shadow-sm hover:bg-zinc-50",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(ShoppingCart, { className: "size-4" }),
+              cart.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute -right-1 -top-1 flex size-5 items-center justify-center rounded-full bg-brand text-[10px] font-bold text-white ring-2 ring-white", children: cart.reduce((sum, item) => sum + item.quantity, 0) })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "hidden text-xs font-medium text-zinc-500 md:inline", children: currentUser.name }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              onClick: handleLogout,
+              className: "flex size-9 items-center justify-center rounded-full bg-zinc-100 text-zinc-600 transition-colors hover:bg-red-50 hover:text-red-600",
+              title: "Log out",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(LogOut, { className: "size-4" })
+            }
+          )
+        ] })
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          Link,
+          {
+            to: "/auth/login",
+            className: "flex items-center gap-1.5 text-sm font-medium text-zinc-600 px-4 py-2 hover:text-ink transition-colors",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(LogIn, { className: "size-4" }),
+              "Sign in"
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          Link,
+          {
+            to: "/auth/register",
+            className: "flex items-center gap-1.5 rounded-full bg-brand px-5 py-2 text-sm font-medium text-white transition-transform active:scale-95 hover:bg-brand/90",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { className: "size-4" }),
+              "Register"
+            ]
+          }
+        )
+      ] }) })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "flex-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {}) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "border-t border-zinc-950/5 bg-white py-16", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl px-6", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 md:grid-cols-5 gap-12", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "col-span-2 space-y-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display text-2xl font-semibold tracking-tighter", children: "KILIMANJARO" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-zinc-500 max-w-xs", children: "A hybrid African marketplace combining instant commerce with competitive auction-driven pricing. Connecting capital between Lagos, London, and Frankfurt." })
+        ] }),
+        [
+          ["Platform", [
+            { label: "Live Auctions", path: "/products" },
+            { label: "Buy It Now", path: "/products" },
+            { label: "Pricing Model", path: "/#pricing" }
+          ]],
+          ["Trust & Escrow", [
+            { label: "KYC Verification", path: "/#how" },
+            { label: "Escrow Custody", path: "/#how" },
+            { label: "Anti-shill Engine", path: "/#how" }
+          ]],
+          ["Corporate", [
+            { label: "About Us", path: "/" },
+            { label: "Admin Access", path: "/admin/login" },
+            { label: "Transaction Logs", path: "/transactions" }
+          ]]
+        ].map(([title, links]) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[10px] font-semibold uppercase tracking-wider text-zinc-400", children: title }),
+          links.map((l) => /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: l.path, className: "text-sm text-zinc-600 hover:text-brand transition-colors", children: l.label }, l.label))
+        ] }, title))
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-16 pt-8 border-t border-zinc-950/5 flex flex-col sm:flex-row justify-between gap-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-zinc-400", children: "© 2025 Kilimanjaro Bids Ltd. Lagos · London · Berlin." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-zinc-400", children: "Regulated · PCI-DSS · GDPR compliant" })
+      ] })
+    ] }) })
+  ] }) });
 }
+const $$splitComponentImporter$9 = () => import("./transactions-B6eHLFct.mjs");
+const Route$a = createFileRoute("/transactions")({
+  component: lazyRouteComponent($$splitComponentImporter$9, "component")
+});
 const BASE_URL = "";
-const Route$1 = createFileRoute("/sitemap.xml")({
+const Route$9 = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
@@ -4765,8 +5563,16 @@ const Route$1 = createFileRoute("/sitemap.xml")({
     }
   }
 });
-const $$splitComponentImporter = () => import("./index-C5s1UNGX.mjs");
-const Route2 = createFileRoute("/")({
+const $$splitComponentImporter$8 = () => import("./products-j-n9WClD.mjs");
+const Route$8 = createFileRoute("/products")({
+  component: lazyRouteComponent($$splitComponentImporter$8, "component")
+});
+const $$splitComponentImporter$7 = () => import("./cart-CUy04t-6.mjs");
+const Route$7 = createFileRoute("/cart")({
+  component: lazyRouteComponent($$splitComponentImporter$7, "component")
+});
+const $$splitComponentImporter$6 = () => import("./index-BnCRGhBc.mjs");
+const Route$6 = createFileRoute("/")({
   head: () => ({
     meta: [{
       title: "Kilimanjaro — Bid from Lagos. Win in London."
@@ -4781,33 +5587,135 @@ const Route2 = createFileRoute("/")({
       content: "Real-time bidding engine with integrated escrow, KYC, and multi-auction support across Lagos and London."
     }]
   }),
+  component: lazyRouteComponent($$splitComponentImporter$6, "component")
+});
+const $$splitComponentImporter$5 = () => import("./auth.register-BT0Uhu3s.mjs");
+const Route$5 = createFileRoute("/auth/register")({
+  component: lazyRouteComponent($$splitComponentImporter$5, "component")
+});
+const $$splitComponentImporter$4 = () => import("./auth.login-BY2BhXnz.mjs");
+const Route$4 = createFileRoute("/auth/login")({
+  component: lazyRouteComponent($$splitComponentImporter$4, "component")
+});
+const $$splitComponentImporter$3 = () => import("./auction._productId-DgHyXIoS.mjs");
+const Route$3 = createFileRoute("/auction/$productId")({
+  component: lazyRouteComponent($$splitComponentImporter$3, "component")
+});
+const $$splitComponentImporter$2 = () => import("./admin.login-B-ICgLwl.mjs");
+const Route$2 = createFileRoute("/admin/login")({
+  component: lazyRouteComponent($$splitComponentImporter$2, "component")
+});
+const $$splitComponentImporter$1 = () => import("./admin.dashboard-kKWkTuu2.mjs");
+const Route$1 = createFileRoute("/admin/dashboard")({
+  component: lazyRouteComponent($$splitComponentImporter$1, "component")
+});
+const $$splitComponentImporter = () => import("./admin.products.new-B3iyy-OG.mjs");
+const Route2 = createFileRoute("/admin/products/new")({
   component: lazyRouteComponent($$splitComponentImporter, "component")
 });
-const SitemapDotxmlRoute = Route$1.update({
+const TransactionsRoute = Route$a.update({
+  id: "/transactions",
+  path: "/transactions",
+  getParentRoute: () => Route$b
+});
+const SitemapDotxmlRoute = Route$9.update({
   id: "/sitemap.xml",
   path: "/sitemap.xml",
-  getParentRoute: () => Route$2
+  getParentRoute: () => Route$b
 });
-const IndexRoute = Route2.update({
+const ProductsRoute = Route$8.update({
+  id: "/products",
+  path: "/products",
+  getParentRoute: () => Route$b
+});
+const CartRoute = Route$7.update({
+  id: "/cart",
+  path: "/cart",
+  getParentRoute: () => Route$b
+});
+const IndexRoute = Route$6.update({
   id: "/",
   path: "/",
-  getParentRoute: () => Route$2
+  getParentRoute: () => Route$b
+});
+const AuthRegisterRoute = Route$5.update({
+  id: "/auth/register",
+  path: "/auth/register",
+  getParentRoute: () => Route$b
+});
+const AuthLoginRoute = Route$4.update({
+  id: "/auth/login",
+  path: "/auth/login",
+  getParentRoute: () => Route$b
+});
+const AuctionProductIdRoute = Route$3.update({
+  id: "/auction/$productId",
+  path: "/auction/$productId",
+  getParentRoute: () => Route$b
+});
+const AdminLoginRoute = Route$2.update({
+  id: "/admin/login",
+  path: "/admin/login",
+  getParentRoute: () => Route$b
+});
+const AdminDashboardRoute = Route$1.update({
+  id: "/admin/dashboard",
+  path: "/admin/dashboard",
+  getParentRoute: () => Route$b
+});
+const AdminProductsNewRoute = Route2.update({
+  id: "/admin/products/new",
+  path: "/admin/products/new",
+  getParentRoute: () => Route$b
 });
 const rootRouteChildren = {
   IndexRoute,
-  SitemapDotxmlRoute
+  CartRoute,
+  ProductsRoute,
+  SitemapDotxmlRoute,
+  TransactionsRoute,
+  AdminDashboardRoute,
+  AdminLoginRoute,
+  AuctionProductIdRoute,
+  AuthLoginRoute,
+  AuthRegisterRoute,
+  AdminProductsNewRoute
 };
-const routeTree = Route$2._addFileChildren(rootRouteChildren)._addFileTypes();
+const routeTree = Route$b._addFileChildren(rootRouteChildren)._addFileTypes();
 const getRouter = () => {
   const queryClient = new QueryClient();
-  const router = createRouter({
+  const router2 = createRouter({
     routeTree,
     context: { queryClient },
     scrollRestoration: true,
     defaultPreloadStaleTime: 0
   });
-  return router;
+  return router2;
 };
-export {
+const router = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
   getRouter
+}, Symbol.toStringTag, { value: "Module" }));
+export {
+  Link as L,
+  Route$3 as R,
+  Sparkles as S,
+  Wallet as W,
+  addProduct as a,
+  addToCart as b,
+  buyDutchAuction as c,
+  checkoutCart as d,
+  createLucideIcon as e,
+  endAuctionEarly as f,
+  removeFromCart as g,
+  resetStore as h,
+  router as i,
+  useStore as j,
+  login as l,
+  placeBid as p,
+  register as r,
+  startAuctionNow as s,
+  topUpWallet as t,
+  updateEscrowStatus as u,
+  withdrawWallet as w
 };

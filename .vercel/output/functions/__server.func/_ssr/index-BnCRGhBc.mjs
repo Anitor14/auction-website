@@ -1,58 +1,10 @@
-import { H as jsxRuntimeExports } from "./server-Cfk_oS8j.mjs";
+import { H as jsxRuntimeExports } from "./server-B9xMLAOv.mjs";
+import { j as useStore, L as Link } from "./router-DSaVKr07.mjs";
+import { h as heroWatch, b as lotCar, l as lotArt, a as lotBag, c as lotMacbook } from "./hero-watch-Ba2e7wSI.mjs";
+import { C as CountdownTimer } from "./countdown-C7diJynH.mjs";
 import "node:async_hooks";
 import "node:stream/web";
 import "node:stream";
-const heroWatch = "/assets/hero-watch-DpWRVUr6.jpg";
-const lotMacbook = "/assets/lot-macbook-CljSjcfm.jpg";
-const lotBag = "/assets/lot-bag-DVu21tcA.jpg";
-const lotArt = "/assets/lot-art-CxrcEJgn.jpg";
-const lotCar = "/assets/lot-car-CweIejGh.jpg";
-const tickerItems = ["LAGOS: 2022 TOYOTA PRADO — CURRENT BID ₦42,500,000", "LONDON: ROLEX DATEJUST 41 — CURRENT BID £9,200", "ABUJA: LUXURY PENTHOUSE GWARINPA — STARTS IN 2H", "BERLIN: HASSELBLAD 907X — CURRENT BID €4,800", "ACCRA: BENIN BRONZE HEAD — CURRENT BID $45,200"];
-const lots = [{
-  image: lotMacbook,
-  category: "Electronics",
-  type: "English Auction",
-  typeColor: "text-emerald-600",
-  title: "MacBook Pro M1 Max 64GB",
-  leftLabel: "Current Bid",
-  leftValue: "₦1,450,000",
-  rightLabel: "Ends In",
-  rightValue: "04:12:09",
-  rightColor: "text-orange-600"
-}, {
-  image: lotBag,
-  category: "Luxury",
-  type: "Sealed Bid",
-  typeColor: "text-blue-600",
-  title: "Chanel Classic Flap Bag",
-  leftLabel: "Est. Value",
-  leftValue: "₦3,200,000",
-  rightLabel: "Status",
-  rightValue: "Verified",
-  rightColor: "text-emerald-600"
-}, {
-  image: lotArt,
-  category: "Art",
-  type: "Dutch Auction",
-  typeColor: "text-orange-600",
-  title: "'Genesis' by Kolawole",
-  leftLabel: "Current Price",
-  leftValue: "₦850,000",
-  rightLabel: "Drops",
-  rightValue: "Every 1h",
-  rightColor: "text-ink"
-}, {
-  image: lotCar,
-  category: "Automotive",
-  type: "English Auction",
-  typeColor: "text-emerald-600",
-  title: "2021 Acura TLX Tech",
-  leftLabel: "Highest Bid",
-  leftValue: "₦24,000,000",
-  rightLabel: "Ends In",
-  rightValue: "00:45:12",
-  rightColor: "text-orange-600"
-}];
 const auctionTypes = [{
   code: "01",
   name: "English",
@@ -98,27 +50,19 @@ const faqs = [{
   a: "Yes. We support 47 countries with multi-currency settlement in NGN, USD, EUR, GBP, and KES. Mobile bidding works on any device."
 }];
 function Index() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-surface font-sans text-ink selection:bg-brand/10 selection:text-brand", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-hidden border-b border-zinc-950/5 bg-zinc-900 py-2.5", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex whitespace-nowrap animate-ticker", children: [0, 1].map((dup) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-12 pr-12 shrink-0", children: tickerItems.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-2 text-xs font-medium tracking-tight text-zinc-400", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "size-1.5 rounded-full bg-emerald-500" }),
-      " ",
-      item
-    ] }, i)) }, dup)) }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { className: "sticky top-0 z-50 border-b border-zinc-950/5 bg-surface/80 backdrop-blur-md", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto flex max-w-7xl items-center justify-between px-6 py-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-8", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display text-xl font-semibold tracking-tighter", children: "KILIMANJARO" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "hidden items-center gap-6 sm:flex", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#auctions", className: "text-sm font-medium text-zinc-500 transition-colors hover:text-ink", children: "Auctions" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#how", className: "text-sm font-medium text-zinc-500 transition-colors hover:text-ink", children: "How it works" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#vendors", className: "text-sm font-medium text-zinc-500 transition-colors hover:text-ink", children: "Vendors" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#pricing", className: "text-sm font-medium text-zinc-500 transition-colors hover:text-ink", children: "Pricing" })
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "text-sm font-medium text-zinc-600 px-4 py-2 hover:text-ink transition-colors", children: "Sign in" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "rounded-full bg-brand px-5 py-2 text-sm font-medium text-white ring-1 ring-brand ring-offset-2 transition-transform active:scale-95", children: "Start Selling" })
-      ] })
-    ] }) }),
+  const {
+    products
+  } = useStore();
+  const activeLots = products.filter((p) => p.status === "active" && p.type !== "Buy Now").slice(0, 4);
+  const IMAGES = {
+    "/src/assets/hero-watch.jpg": heroWatch,
+    "/src/assets/lot-macbook.jpg": lotMacbook,
+    "/src/assets/lot-bag.jpg": lotBag,
+    "/src/assets/lot-art.jpg": lotArt,
+    "/src/assets/lot-car.jpg": lotCar
+  };
+  const getImageSrc = (path) => IMAGES[path] || path;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-surface font-sans text-ink selection:bg-brand/10 selection:text-brand", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto max-w-7xl px-6 py-20 lg:py-32", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 items-end gap-16 lg:grid-cols-12", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "lg:col-span-7", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-2 rounded-full border border-zinc-950/10 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-zinc-500", children: [
@@ -163,26 +107,39 @@ function Index() {
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "text-sm font-medium text-zinc-500 hover:text-brand", children: "View all 482 auctions →" })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4", children: lots.map((lot) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "group relative flex flex-col overflow-hidden rounded-xl bg-white ring-1 ring-black/5 transition-all hover:ring-black/10", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: lot.image, alt: lot.title, loading: "lazy", width: 800, height: 600, className: "aspect-[4/3] w-full object-cover" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col p-5", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between text-[10px] font-semibold uppercase tracking-wider text-zinc-400", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: lot.category }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: lot.typeColor, children: lot.type })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 font-medium", children: lot.title }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 grid grid-cols-2 border-t border-zinc-950/5 pt-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] uppercase text-zinc-400", children: lot.leftLabel }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-lg font-medium", children: lot.leftValue })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4", children: activeLots.map((lot) => {
+        const currentPrice = lot.currentBid || lot.price;
+        const typeColor = lot.type === "English" ? "text-emerald-600" : lot.type === "Sealed Bid" ? "text-blue-600" : lot.type === "Dutch" ? "text-orange-600" : lot.type === "Reverse" ? "text-purple-600" : "text-zinc-600";
+        const leftLabel = lot.type === "English" ? "Current Bid" : lot.type === "Sealed Bid" ? "Starting Price" : lot.type === "Dutch" ? "Current Price" : lot.type === "Reverse" ? "Current Offer" : "Price";
+        return /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { to: "/auction/$productId", params: {
+          productId: lot.id
+        }, className: "group relative flex flex-col overflow-hidden rounded-xl bg-white ring-1 ring-black/5 transition-all hover:ring-black/10 hover:shadow-md cursor-pointer", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: getImageSrc(lot.image), alt: lot.title, loading: "lazy", width: 800, height: 600, className: "aspect-[4/3] w-full object-cover transition-transform group-hover:scale-[1.02]" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col p-5", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between text-[10px] font-semibold uppercase tracking-wider text-zinc-400", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: lot.category }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: typeColor, children: lot.type })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-right", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] uppercase text-zinc-400", children: lot.rightLabel }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: `font-display text-lg font-medium ${lot.rightColor}`, children: lot.rightValue })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 font-medium text-zinc-800 line-clamp-1 group-hover:text-brand transition-colors", children: lot.title }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 grid grid-cols-2 border-t border-zinc-950/5 pt-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] uppercase text-zinc-400", children: leftLabel }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-display text-lg font-medium", children: [
+                  "₦",
+                  currentPrice.toLocaleString()
+                ] })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-right", children: lot.endTime ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] uppercase text-zinc-400", children: "Ends In" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-lg font-medium text-orange-600", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CountdownTimer, { endTime: lot.endTime }) })
+              ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] uppercase text-zinc-400", children: "Status" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-lg font-medium text-emerald-600", children: lot.stock !== void 0 ? `${lot.stock} Left` : "Active" })
+              ] }) })
             ] })
           ] })
-        ] })
-      ] }, lot.title)) })
+        ] }, lot.id);
+      }) })
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto max-w-7xl px-6 py-24", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 gap-12 lg:grid-cols-12", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "lg:col-span-4", children: [
@@ -530,22 +487,6 @@ function Index() {
           /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "rounded-lg bg-brand px-6 py-3 text-sm font-medium hover:bg-brand/90 transition-colors", children: "Enter the auction floor" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "rounded-lg bg-white/10 px-6 py-3 text-sm font-medium ring-1 ring-white/20 hover:bg-white/15 transition-colors", children: "Talk to a vendor lead" })
         ] })
-      ] })
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "border-t border-zinc-950/5 bg-white py-16", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl px-6", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 md:grid-cols-5 gap-12", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "col-span-2 space-y-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display text-2xl font-semibold tracking-tighter", children: "KILIMANJARO" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-zinc-500 max-w-xs", children: "A hybrid African marketplace combining instant commerce with competitive auction-driven pricing." })
-        ] }),
-        [["Platform", ["Auctions", "Sell", "Categories", "Featured Lots"]], ["Trust", ["KYC/AML", "Escrow", "Anti-shill", "Disputes"]], ["Company", ["About", "Careers", "Press", "Contact"]]].map(([title, links]) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[10px] font-semibold uppercase tracking-wider text-zinc-400", children: title }),
-          links.map((l) => /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "text-sm text-zinc-600 hover:text-brand transition-colors", children: l }, l))
-        ] }, title))
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-16 pt-8 border-t border-zinc-950/5 flex flex-col sm:flex-row justify-between gap-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-zinc-400", children: "© 2025 Kilimanjaro Bids Ltd. Lagos · London · Berlin." }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-zinc-400", children: "Regulated · PCI-DSS · GDPR compliant" })
       ] })
     ] }) })
   ] });
