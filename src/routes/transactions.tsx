@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useStore, topUpWallet, withdrawWallet, updateEscrowStatus } from "@/lib/store";
 import { toast } from "sonner";
 import {
@@ -32,6 +32,17 @@ function TransactionsPage() {
   const [withdrawAmount, setWithdrawAmount] = useState("");
   const [showTopUp, setShowTopUp] = useState(false);
   const [showWithdraw, setShowWithdraw] = useState(false);
+
+  // Micro-animation wallet balance flash triggers
+  const [animateBalance, setAnimateBalance] = useState(false);
+  const currentBalance = currentUser?.walletBalance || 0;
+
+  useEffect(() => {
+    if (currentBalance === 0) return;
+    setAnimateBalance(true);
+    const t = setTimeout(() => setAnimateBalance(false), 800);
+    return () => clearTimeout(t);
+  }, [currentBalance]);
 
   // Asset image lookup helper
   const IMAGES: Record<string, string> = {
@@ -111,7 +122,7 @@ function TransactionsPage() {
   };
 
   return (
-    <div className="bg-surface py-12">
+    <div className="bg-surface py-12 animate-fade-in-up">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-8">
           <span className="text-xs font-semibold uppercase tracking-widest text-brand">Bidding Ledger</span>
@@ -132,7 +143,9 @@ function TransactionsPage() {
               <div className="relative z-10 space-y-6">
                 <div>
                   <p className="text-[10px] uppercase tracking-widest text-zinc-400">Available bidding capital</p>
-                  <p className="font-display text-4xl font-medium mt-2">
+                  <p className={`font-display text-4xl font-medium mt-2 transition-all duration-300 ${
+                    animateBalance ? "animate-balance-glow text-brand" : ""
+                  }`}>
                     ₦{currentUser.walletBalance.toLocaleString()}
                   </p>
                 </div>
@@ -144,7 +157,7 @@ function TransactionsPage() {
                         setShowTopUp(true);
                         setShowWithdraw(false);
                       }}
-                      className="flex items-center justify-center gap-1 rounded-lg bg-brand px-4 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-brand/90"
+                      className="flex items-center justify-center gap-1 rounded-lg bg-brand px-4 py-2.5 text-xs font-semibold text-white transition-all hover:bg-brand/90 hover:scale-[1.02] active:scale-95 duration-200 shadow-sm"
                     >
                       <Plus className="size-3.5" /> Deposit
                     </button>
@@ -153,7 +166,7 @@ function TransactionsPage() {
                         setShowWithdraw(true);
                         setShowTopUp(false);
                       }}
-                      className="flex items-center justify-center gap-1 rounded-lg bg-zinc-800 px-4 py-2.5 text-xs font-semibold text-zinc-200 transition-colors hover:bg-zinc-700"
+                      className="flex items-center justify-center gap-1 rounded-lg bg-zinc-800 px-4 py-2.5 text-xs font-semibold text-zinc-200 transition-all hover:bg-zinc-700 hover:scale-[1.02] active:scale-95 duration-200 shadow-sm"
                     >
                       <ArrowUpRight className="size-3.5" /> Withdraw
                     </button>

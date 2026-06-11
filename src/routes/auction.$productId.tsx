@@ -121,7 +121,7 @@ function AuctionDetailPage() {
   };
 
   return (
-    <div className="bg-surface py-12">
+    <div className="bg-surface py-12 animate-fade-in-up">
       <div className="mx-auto max-w-7xl px-6">
         {/* Breadcrumbs */}
         <nav className="mb-8 flex items-center gap-2 text-xs font-medium text-zinc-500">
@@ -349,9 +349,9 @@ function AuctionDetailPage() {
 
                           <button
                             type="submit"
-                            className="w-full flex items-center justify-center gap-2 rounded-lg bg-zinc-900 py-3 text-sm font-semibold text-white transition-colors hover:bg-zinc-800 shadow"
+                            className="group w-full flex items-center justify-center gap-2 rounded-lg bg-zinc-900 py-3 text-sm font-semibold text-white transition-all hover:bg-zinc-800 active:scale-[0.98] shadow"
                           >
-                            <Gavel className="size-4" /> Place Ascending Bid
+                            <Gavel className="size-4 group-hover:animate-gavel-strike" /> Place Ascending Bid
                           </button>
                         </form>
                       )}
@@ -374,8 +374,8 @@ function AuctionDetailPage() {
                       {/* 3. Sealed Secret Bid Input */}
                       {product.type === "Sealed Bid" && (
                         <form onSubmit={handlePlaceBid} className="space-y-4">
-                          <div className="rounded-lg bg-zinc-50 border border-zinc-200/50 p-3 flex gap-2">
-                            <Lock className="size-4 text-blue-600 shrink-0 mt-0.5" />
+                          <div className="group rounded-lg bg-zinc-50 border border-zinc-200/50 p-3 flex gap-2 hover:bg-zinc-100/50 transition-colors">
+                            <Lock className="size-4 text-blue-600 shrink-0 mt-0.5 group-hover:animate-lock-wobble" />
                             <p className="text-[11px] text-zinc-500 leading-relaxed">
                               This is a Sealed Bid auction. Offers are hidden. The highest offer submitted at the end of the duration wins the lot at their bid. Enter your maximum offer:
                             </p>
@@ -398,9 +398,9 @@ function AuctionDetailPage() {
                           </div>
                           <button
                             type="submit"
-                            className="w-full flex items-center justify-center gap-2 rounded-lg bg-zinc-900 py-3 text-sm font-semibold text-white transition-colors hover:bg-zinc-800 shadow"
+                            className="group w-full flex items-center justify-center gap-2 rounded-lg bg-zinc-900 py-3 text-sm font-semibold text-white transition-all hover:bg-zinc-800 active:scale-[0.98] shadow"
                           >
-                            <Gavel className="size-4" /> Submit Confidential Offer
+                            <Gavel className="size-4 group-hover:animate-gavel-strike" /> Submit Confidential Offer
                           </button>
                         </form>
                       )}
@@ -431,9 +431,9 @@ function AuctionDetailPage() {
                           </div>
                           <button
                             type="submit"
-                            className="w-full flex items-center justify-center gap-2 rounded-lg bg-zinc-900 py-3 text-sm font-semibold text-white transition-colors hover:bg-zinc-800"
+                            className="group w-full flex items-center justify-center gap-2 rounded-lg bg-zinc-900 py-3 text-sm font-semibold text-white transition-all hover:bg-zinc-800 active:scale-[0.98]"
                           >
-                            <Gavel className="size-4" /> Submit Lower Offer
+                            <Gavel className="size-4 group-hover:animate-gavel-strike" /> Submit Lower Offer
                           </button>
                         </form>
                       )}
@@ -547,7 +547,7 @@ function AuctionDetailPage() {
                     {lotBids.map((b, i) => (
                       <div
                         key={b.id}
-                        className={`flex items-center justify-between p-3 rounded-lg border text-xs transition-all ${i === 0
+                        className={`flex items-center justify-between p-3 rounded-lg border text-xs transition-all animate-fade-in-up ${i === 0
                           ? "bg-brand/5 border-brand/20 animate-pulse-bid"
                           : "bg-zinc-50 border-zinc-100"
                           }`}

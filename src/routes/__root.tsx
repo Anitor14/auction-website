@@ -115,6 +115,17 @@ function RootComponent() {
   const location = useLocation();
   const router = useRouter();
 
+  // Micro-animation cart bouncy triggers
+  const [animateCart, setAnimateCart] = useState(false);
+  const cartQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  useEffect(() => {
+    if (cartQty === 0) return;
+    setAnimateCart(true);
+    const t = setTimeout(() => setAnimateCart(false), 400);
+    return () => clearTimeout(t);
+  }, [cartQty]);
+
   // Handle logout
   const handleLogout = () => {
     logout();
@@ -162,17 +173,17 @@ function RootComponent() {
         <nav className="sticky top-0 z-50 border-b border-zinc-950/5 bg-surface/80 backdrop-blur-md">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
             <div className="flex items-center gap-8">
-              <Link to="/" className="font-display text-2xl font-semibold tracking-tighter text-ink hover:text-brand transition-colors">
+              <Link to="/" className="font-display text-2xl font-semibold tracking-tighter text-ink hover:text-brand transition-all hover:scale-102 active:scale-98 duration-200">
                 KILIMANJARO
               </Link>
               <div className="hidden items-center gap-6 sm:flex">
-                <Link to="/products" className="text-sm font-medium text-zinc-500 transition-colors hover:text-ink">
+                <Link to="/products" className="text-sm font-medium text-zinc-500 transition-colors hover:text-brand hover:scale-102 transition-transform active:scale-98 duration-150">
                   Browse Catalog
                 </Link>
-                <a href="/#how" className="text-sm font-medium text-zinc-500 transition-colors hover:text-ink">
+                <a href="/#how" className="text-sm font-medium text-zinc-500 transition-colors hover:text-brand hover:scale-102 transition-transform active:scale-98 duration-150">
                   How It Works
                 </a>
-                <a href="/#pricing" className="text-sm font-medium text-zinc-500 transition-colors hover:text-ink">
+                <a href="/#pricing" className="text-sm font-medium text-zinc-500 transition-colors hover:text-brand hover:scale-102 transition-transform active:scale-98 duration-150">
                   Pricing
                 </a>
               </div>
@@ -186,9 +197,9 @@ function RootComponent() {
                   {currentUser.role === "admin" && (
                     <Link
                       to="/admin/dashboard"
-                      className="flex items-center gap-1 rounded-full bg-zinc-900 px-3.5 py-1.5 text-xs font-medium text-white transition-all hover:bg-zinc-800"
+                      className="flex items-center gap-1 rounded-full bg-zinc-900 px-3.5 py-1.5 text-xs font-medium text-white transition-all hover:bg-zinc-800 hover:scale-[1.03] active:scale-95 duration-200"
                     >
-                      <LayoutDashboard className="size-3.5" />
+                      <LayoutDashboard className="size-3.5 animate-pulse-bid" />
                       Admin Panel
                     </Link>
                   )}
@@ -197,9 +208,9 @@ function RootComponent() {
                   {currentUser.role === "buyer" && (
                     <Link
                       to="/transactions"
-                      className="flex items-center gap-2 rounded-full border border-zinc-950/10 bg-white px-3.5 py-1.5 text-xs font-semibold text-zinc-700 shadow-sm transition-all hover:bg-zinc-50"
+                      className="flex items-center gap-2 rounded-full border border-zinc-950/10 bg-white px-3.5 py-1.5 text-xs font-semibold text-zinc-700 shadow-sm transition-all hover:bg-zinc-50 hover:scale-[1.03] active:scale-95 duration-200"
                     >
-                      <Wallet className="size-3.5 text-brand" />
+                      <Wallet className="size-3.5 text-brand transition-transform hover:rotate-12 duration-200" />
                       <span>₦{currentUser.walletBalance.toLocaleString()}</span>
                     </Link>
                   )}
@@ -208,7 +219,9 @@ function RootComponent() {
                   {currentUser.role === "buyer" && (
                     <Link
                       to="/cart"
-                      className="relative flex size-9 items-center justify-center rounded-full border border-zinc-950/10 bg-white text-zinc-700 shadow-sm hover:bg-zinc-50"
+                      className={`relative flex size-9 items-center justify-center rounded-full border border-zinc-950/10 bg-white text-zinc-700 shadow-sm transition-all hover:bg-zinc-50 hover:scale-105 active:scale-90 duration-200 ${
+                        animateCart ? "animate-cart-bounce" : ""
+                      }`}
                     >
                       <ShoppingCart className="size-4" />
                       {cart.length > 0 && (
@@ -226,7 +239,7 @@ function RootComponent() {
                     </span>
                     <button
                       onClick={handleLogout}
-                      className="flex size-9 items-center justify-center rounded-full bg-zinc-100 text-zinc-600 transition-colors hover:bg-red-50 hover:text-red-600"
+                      className="flex size-9 items-center justify-center rounded-full bg-zinc-100 text-zinc-600 transition-all hover:bg-red-50 hover:text-red-600 hover:scale-105 active:scale-90 duration-200"
                       title="Log out"
                     >
                       <LogOut className="size-4" />
@@ -237,14 +250,14 @@ function RootComponent() {
                 <div className="flex items-center gap-2">
                   <Link
                     to="/auth/login"
-                    className="flex items-center gap-1.5 text-sm font-medium text-zinc-600 px-4 py-2 hover:text-ink transition-colors"
+                    className="flex items-center gap-1.5 text-sm font-medium text-zinc-600 px-4 py-2 hover:text-ink transition-all hover:scale-102 active:scale-98 duration-200"
                   >
                     <LogIn className="size-4" />
                     Sign in
                   </Link>
                   <Link
                     to="/auth/register"
-                    className="flex items-center gap-1.5 rounded-full bg-brand px-5 py-2 text-sm font-medium text-white transition-transform active:scale-95 hover:bg-brand/90"
+                    className="flex items-center gap-1.5 rounded-full bg-brand px-5 py-2 text-sm font-medium text-white transition-all hover:bg-brand/90 hover:scale-[1.03] active:scale-95 duration-200"
                   >
                     <Sparkles className="size-4" />
                     Register

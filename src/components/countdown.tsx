@@ -14,7 +14,7 @@ export function CountdownTimer({ endTime, onEnd, className = "" }: CountdownTime
       const difference = +new Date(endTime) - +new Date();
       if (difference <= 0) {
         if (onEnd) onEnd();
-         return "Closed";
+        return "Closed";
       }
 
       const days = Math.floor(difference / (1000 * 60 * 60 * 24));

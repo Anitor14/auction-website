@@ -135,7 +135,7 @@ function ProductsPage() {
   };
 
   return (
-    <div className="bg-surface py-12">
+    <div className="bg-surface py-12 animate-fade-in-up">
       <div className="mx-auto max-w-7xl px-6">
         {/* Header Title */}
         <div className="mb-8">
@@ -318,14 +318,14 @@ function ProductsPage() {
                       key={lot.id}
                       to="/auction/$productId"
                       params={{ productId: lot.id }}
-                      className="group flex flex-col overflow-hidden rounded-xl bg-white border border-zinc-950/5 ring-1 ring-black/3 transition-all hover:ring-black/5 hover:shadow-md cursor-pointer"
+                      className="group flex flex-col overflow-hidden rounded-xl bg-white border border-zinc-950/5 ring-1 ring-black/3 transition-all hover:ring-black/5 hover:-translate-y-1 hover:shadow-lg duration-300 cursor-pointer"
                     >
                       {/* Image Box */}
                       <div className="relative aspect-4/3 overflow-hidden bg-zinc-100">
                         <img
                           src={getImageSrc(lot.image)}
                           alt={lot.title}
-                          className="size-full object-cover transition-transform duration-300 group-hover:scale-102"
+                          className="size-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                         />
                         {/* Format Badge */}
                         <span
